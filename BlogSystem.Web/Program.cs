@@ -1,4 +1,7 @@
 
+using Blog.Presistance.Data.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace BlogSystem.Web
 {
     public class Program
@@ -7,6 +10,13 @@ namespace BlogSystem.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<BlogDbContext>(options =>
+            {
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")
+                );
+            });
+            Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
             // Add services to the container.
 
             builder.Services.AddControllers();
