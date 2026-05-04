@@ -14,7 +14,7 @@ namespace Blog.Domain.Entities
 
         public string Content { get; set; } = default!;
 
-        public int AuthorId { get; set; } = default!;
+        public string AuthorId { get; set; } = default!;
         public int CategoryId { get; set; } = default!;
 
         public DateTime CreatedAt { get; set; }
@@ -27,7 +27,7 @@ namespace Blog.Domain.Entities
 
         public Category Category { get; set; } = default!;
 
-        public ICollection<Comment>? Comments { get; set; }=new List<Comment>();
+        public ICollection<Comment> Comments { get; set; }=new List<Comment>();
         #endregion
     }
 }

@@ -14,9 +14,10 @@ namespace Blog.Presistance.Data.Configuration
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.HasIndex(x => x.Email).IsUnique();
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
 
-            builder.Property(P => P.Name)
-                 .HasMaxLength(50);
+
             builder.Property(P => P.Email)
                 .HasMaxLength (100);
 

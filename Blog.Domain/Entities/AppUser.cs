@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace Blog.Domain.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser
     {
-        public int Id { get; set; }=default!;
+
         public string Name { get; set; }= default!;
-        public string Email { get; set; } = default!;
-        public string PasswordHash { get; set; } = default!;
+
 
         #region Nav Properties
-        public ICollection<BlogPost>? Posts { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
+        public ICollection<BlogPost> Posts { get; set; }= new List<BlogPost>();
+        public ICollection<Comment> Comments { get; set; }= new List<Comment>();
 
         #endregion
 

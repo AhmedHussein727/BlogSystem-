@@ -13,7 +13,7 @@ namespace Blog.Domain.Entities
 
         public int PostId { get; set; }= default!;
 
-        public int AuthorId { get; set; } = default!;
+        public string AuthorId { get; set; } = default!;
 
         public DateTime CreatedAt { get; set; }
 
