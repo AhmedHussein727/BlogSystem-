@@ -130,18 +130,6 @@ Blog.MVC
 Use JWT Token:
 
 Authorization: Bearer YOUR_TOKEN
-📸 Screenshots
-🏠 Posts Page
-
-Add Screenshot Here
-
-📄 Post Details
-
-Add Screenshot Here
-
-🔐 Login Page
-
-Add Screenshot Here
 
 📈 Future Improvements
 Like System
