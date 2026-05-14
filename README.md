@@ -1,14 +1,10 @@
 # 🚀 Blog System
 
-<div align="center">
-
 ![.NET](https://img.shields.io/badge/.NET-8.0-purple?style=for-the-badge&logo=.net)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-Web_API-blue?style=for-the-badge&logo=dotnet)
 ![MVC](https://img.shields.io/badge/MVC-Application-green?style=for-the-badge)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-Database-red?style=for-the-badge&logo=microsoftsqlserver)
 ![JWT](https://img.shields.io/badge/JWT-Authentication-orange?style=for-the-badge&logo=jsonwebtokens)
-
-</div>
 
 ---
 
@@ -130,7 +126,6 @@ Blog.MVC
 Use JWT Token:
 
 Authorization: Bearer YOUR_TOKEN
-
 📈 Future Improvements
 Like System
 Rich Text Editor
@@ -141,6 +136,7 @@ Admin Dashboard
 Caching
 SignalR Notifications
 👨‍💻 Developer
+
 Ahmed Hussein
 
 ASP.NET Core Backend Developer
@@ -152,7 +148,4 @@ If you like this project:
 ⭐ Star the repository
 🍴 Fork the project
 🛠️ Contribute
-
-<div align="center">
 🔥 Built with ASP.NET Core & Clean Architecture
-</div> `
