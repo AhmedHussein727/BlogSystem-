@@ -1,0 +1,60 @@
+﻿@model Blog.MVC.ViewModels.PostDetailsViewModel
+
+<h1>@Model.Post.Title</h1>
+
+<hr />
+
+<p>
+    @Model.Post.Content
+</p>
+
+<hr />
+
+<h3>Comments</h3>
+<hr />
+
+<h3>Add Comment</h3>
+
+<form asp-action="CreateComment" method="post">
+
+    <input type="hidden"
+           asp-for="CreateComment.PostId"
+           value="@Model.Post.Id" />
+
+    <div>
+        <textarea asp-for="CreateComment.Content"
+                  rows="4"
+                  cols="50">
+        </textarea>
+    </div>
+
+    <span asp-validation-for="CreateComment.Content"></span>
+
+    <br />
+
+    <button type="submit">
+        Add Comment
+    </button>
+
+</form>
+@if (Model.Comments.Any())
+{
+    foreach (var comment in Model.Comments)
+    {
+        <div style="margin-bottom:15px">
+
+            <strong>
+                @comment.AuthorName
+            </strong>
+
+            <p>
+                @comment.Content
+            </p>
+
+        </div>
+    }
+}
+else
+{
+    <p>No Comments Yet</p>
+}
