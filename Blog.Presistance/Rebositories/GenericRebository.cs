@@ -28,28 +28,21 @@ namespace Blog.Presistance.Rebositories
             _DbContext.Set<TEntity>().Remove(entity);
         }
 
-        public IQueryable<TEntity> GetAllAsync(
-                 Expression<Func<TEntity, bool>>? condition,
-                 List<Expression<Func<TEntity, object>>>? includes)
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            IQueryable<TEntity> query = _DbContext.Set<TEntity>();
+            return await _DbContext.Set<TEntity>().ToListAsync();
+        }
 
-            // filter
-            if (condition is not null)
-            {
-                query = query.Where(condition);
-            }
+        public async Task<IEnumerable<TEntity>> GetAllAsync(
+           ISpecifications<TEntity, TKey> specifications
+       )
+        {
+            var Query = SpecificationEvaluator.CreateQuery(
+                _DbContext.Set<TEntity>(),
+                specifications
+            );
 
-            // includes
-            if (includes is not null)
-            {
-                foreach (var include in includes)
-                {
-                    query = query.Include(include);
-                }
-            }
-
-            return await query ;
+            return await Query.ToListAsync();
         }
 
         public async Task<TEntity?> GetByIdAsync(TKey id)
@@ -57,9 +50,26 @@ namespace Blog.Presistance.Rebositories
             return await _DbContext.Set<TEntity>().FindAsync(id);
         }
 
+        public async Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            var Query = SpecificationEvaluator.CreateQuery(
+                _DbContext.Set<TEntity>(),
+                specifications
+            );
+
+            return await Query.FirstOrDefaultAsync();
+        }
+
         public void Update(TEntity entity)
         {
             _DbContext.Set<TEntity>().Update(entity);
+        }
+
+        public async Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            return await SpecificationEvaluator
+                .CreateQuery(_DbContext.Set<TEntity>(), specifications) //_dbContext.Products.where(P=>P.BrandId==2)
+                .CountAsync();
         }
     }
 }

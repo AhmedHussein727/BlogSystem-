@@ -13,7 +13,10 @@ namespace Blog.Sevices.MappingProfiles
     {
         public BlogPostProfile()
         {
-            CreateMap<BlogPost, BlogPostDto>();
+            CreateMap<BlogPost, BlogPostDto>()
+            .ForMember(
+                dest => dest.CategoryName,
+                opt => opt.MapFrom(src => src.Category.Name));
             CreateMap<CreateBlogPostDto, BlogPost>();
             CreateMap<UpdatePostDto, BlogPost>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

@@ -9,17 +9,20 @@ namespace Blog.Domain.Interfaces
 {
     public interface IGenericRebository<TEntity, Tkey> where TEntity : class
     {
-        public IQueryable<TEntity> GetAllAsync(
-                 Expression<Func<TEntity, bool>>? condition,
-                 List<Expression<Func<TEntity, object>>>? includes);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+
+        Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity, Tkey> specifications);
 
         Task<TEntity?> GetByIdAsync(Tkey id);
+        Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, Tkey> specifications);
 
         Task AddAsync(TEntity entity);
 
         void Update(TEntity entity);
 
         void Delete(TEntity entity);
+
+        Task<int> CountAsync(ISpecifications<TEntity, Tkey> specifications);
 
     }
 }

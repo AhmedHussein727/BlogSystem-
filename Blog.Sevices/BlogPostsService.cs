@@ -3,6 +3,7 @@ using Blog.Domain.Entities;
 using Blog.Domain.Entities.Enums;
 using Blog.Domain.Interfaces;
 using Blog.Services.Abstraction;
+using Blog.Sevices.Specifications;
 using Blog.Shared.DTOs;
 using Blog.Shared.DTOs.PostsDTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -28,7 +29,7 @@ namespace Blog.Sevices
             _mapper = mapper;
         }
 
-        public async Task<BlogPostDto?> CreateBlogPostAsync(CreateBlogPostDto createDto)
+        public async Task<BlogPostDto?> CreateBlogPostAsync(CreateBlogPostDto createDto, string userId)
         {
             // validate category
             var category = await _unitOfWork
@@ -39,6 +40,7 @@ namespace Blog.Sevices
                 return null;
 
             var post = _mapper.Map<BlogPost>(createDto);
+            post.AuthorId = userId;
 
             await _unitOfWork
                 .GetRepository<BlogPost, int>()
@@ -65,20 +67,22 @@ namespace Blog.Sevices
 
         public async Task<PaginationResponse<BlogPostDto>> GetAllPostsAsync(string? categoryName, Status? status, PaginationParametersDTO paginationParams)
         {
-            var query = _unitOfWork.GetRepository<BlogPost, int>().GetAllAsync(null,null);
-            if (!string.IsNullOrEmpty(categoryName))
-                query = query.Where(x => x.Category.Name == categoryName);
-            if(status.HasValue )
-                query=query.Where(x=>x.Status == status);
-            var count = await query.CountAsync();
+            var spec = new BlogPostSpecification(
+        categoryName,
+        status,
+        paginationParams.PageIndex,
+        paginationParams.PageSize
+    );
 
-            var data = await query
-                .Include(x => x.Category)
-                .Skip((paginationParams.PageIndex - 1) * paginationParams.PageSize)
-                .Take(paginationParams.PageSize)
-                .ToListAsync();
+            // Spec للـ Count بدون Pagination
+            var countSpec = new BlogPostSpecification(categoryName, status);
 
-            var mapped = _mapper.Map<IReadOnlyList<BlogPostDto>>(data);
+            var repo = _unitOfWork.GetRepository<BlogPost, int>();
+
+            var posts = await repo.GetAllAsync(spec);
+            var count = await repo.CountAsync(countSpec);
+
+            var mapped = _mapper.Map<IReadOnlyList<BlogPostDto>>(posts);
 
             return new PaginationResponse<BlogPostDto>(
                 paginationParams.PageIndex,
@@ -96,7 +100,7 @@ namespace Blog.Sevices
         {
             var post = await _unitOfWork
                 .GetRepository<BlogPost, int>()
-                .GetByIdAsync(id);
+                .GetByIdAsync(new BlogPostSpecification(id));
 
             if (post is null)
                 return null;

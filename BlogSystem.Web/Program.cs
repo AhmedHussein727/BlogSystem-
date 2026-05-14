@@ -63,7 +63,7 @@ namespace BlogSystem.Web
                    };
                });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<ICommentService,CommentService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

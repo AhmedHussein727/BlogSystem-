@@ -15,9 +15,9 @@ namespace Blog.Shared.DTOs.PostsDTOs
         public string Title { get; set; } = default!;
 
         public string Content { get; set; } = default!;
-        public Category Category { get; set; } = default!;
+        public string CategoryName { get; set; } = default!;
     }
-    
+
 
 
 }

@@ -15,7 +15,7 @@ namespace Blog.Services.Abstraction
 
         Task<BlogPostDto?> GetPostByIdAsync(int id);
 
-        public Task<BlogPostDto?> CreateBlogPostAsync(CreateBlogPostDto createDto);
+        public Task<BlogPostDto?> CreateBlogPostAsync(CreateBlogPostDto createDto,string userId);
 
         public Task<BlogPostDto?> UpdateBlogPost(UpdatePostDto updatePostDto,int PostId);
 

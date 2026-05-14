@@ -1,0 +1,21 @@
+﻿@using Blog.MVC.DTOs
+@model List<BlogPostDto>
+
+<h1>Posts</h1>
+
+@foreach (var post in Model)
+{
+    <div style="margin-bottom:20px">
+
+        <h2>@post.Title</h2>
+
+        <p>@post.Content</p>
+
+        <a asp-controller="Posts"
+           asp-action="Details"
+           asp-route-id="@post.Id">
+            Details
+        </a>
+
+    </div>
+}

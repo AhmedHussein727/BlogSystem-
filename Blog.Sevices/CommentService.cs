@@ -2,6 +2,7 @@
 using Blog.Domain.Entities;
 using Blog.Domain.Interfaces;
 using Blog.Services.Abstraction;
+using Blog.Sevices.Specifications;
 using Blog.Shared.DTOs.CommentsDtos;
 using System;
 using System.Collections.Generic;
@@ -66,11 +67,11 @@ namespace Blog.Sevices
 
         public async Task<IEnumerable<GetCommentsDto>> GetCommentsAsync(int postId)
         {
-            var comments=await _unitOfWork.GetRepository<Comment,int>().GetAllAsync(x=>x.PostId== postId, new List<Expression<Func<Comment, object>>>
-            {
-                c=>c.Post,
-                c=>c.Author
-            });
+            var spec = new CommentSpecification(postId);
+
+            var comments = await _unitOfWork
+                .GetRepository<Comment, int>()
+                .GetAllAsync(spec);
 
             return _mapper.Map<IEnumerable<GetCommentsDto>>(comments);
 

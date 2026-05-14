@@ -27,6 +27,7 @@ namespace Blog.Presentation.Controllers
         }
         [HttpPost]
         [Authorize]
+        //[AllowAnonymous]
         public async Task<ActionResult<GetCommentsDto>> CreateComment([FromBody] CreateCommentDto createCommentDto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

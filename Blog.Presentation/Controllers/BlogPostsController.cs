@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,7 +46,13 @@ namespace Blog.Presentation.Controllers
         [Authorize(Roles ="Admin,Editor")]
         public async Task<ActionResult<BlogPostDto>> CreateBlogPost(CreateBlogPostDto createBlogPostDto)
         {
-            var Post = await _blogPostService.CreateBlogPostAsync(createBlogPostDto);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId is null)
+                return Unauthorized();
+
+            var Post = await _blogPostService
+                .CreateBlogPostAsync(createBlogPostDto, userId);
+           
             if (Post == null)
                 return BadRequest("Invalid data");
 
