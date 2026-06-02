@@ -1,19 +1,21 @@
 ﻿using Blog.Domain.Entities.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Blog.MVC.DTOs
 {
-    public class BlogPostDto
+    public class CreateBlogPostDTO
     {
-        public int Id { get; set; }
-
+        [Required]
+        [MaxLength(200)]
         public string Title { get; set; } = default!;
 
+        [Required]
         public string Content { get; set; } = default!;
 
+        [Range(1, int.MaxValue)]
         public int CategoryId { get; set; }
 
-        public string CategoryName { get; set; } = default!;
-
+        [Required]
         public Status Status { get; set; }
     }
 }

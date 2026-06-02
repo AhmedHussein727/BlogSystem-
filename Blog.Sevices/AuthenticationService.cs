@@ -64,7 +64,7 @@ namespace Blog.Sevices
             var user = new AppUser()
             {
                 Email = registerDTO.Email,
-                UserName = registerDTO.Email,
+                UserName = registerDTO.DisplayName,
                 Name =registerDTO.DisplayName,
                 PhoneNumber=registerDTO.PhoneNumber,
             };
@@ -161,8 +161,8 @@ namespace Blog.Sevices
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-                new Claim(JwtRegisteredClaimNames.Name, user.UserName!),
+                new Claim(ClaimTypes.Email, user.Email!),
+                new Claim(ClaimTypes.Name, user.Name!),
             };
 
             var roles =await _userManager.GetRolesAsync(user);

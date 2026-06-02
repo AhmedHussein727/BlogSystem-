@@ -1,3 +1,6 @@
+using Blog.MVC.Services;
+using Blog.MVC.ServicesAbstraction;
+
 namespace Blog.MVC
 {
     public class Program
@@ -12,6 +15,14 @@ namespace Blog.MVC
             {
                 options.BaseAddress = new Uri("https://localhost:7145/api/");
             });
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddScoped<
+                ITokenParserService,
+                TokenParserService>();
 
             var app = builder.Build();
 

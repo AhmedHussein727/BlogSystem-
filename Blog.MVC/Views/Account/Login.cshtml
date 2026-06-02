@@ -1,24 +1,43 @@
-﻿@model Blog.MVC.DTOs.LoginDto
+﻿@using Blog.MVC.DTOs
+@model LoginDto
 
-<h1>Login</h1>
+<h2>Login</h2>
 
-<form method="post">
+<form asp-action="Login" method="post">
+
+    <div asp-validation-summary="All"></div>
 
     <div>
-        <label>Email</label>
-
+        <label asp-for="Email"></label>
         <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
     </div>
+
+    <br />
 
     <div>
-        <label>Password</label>
-
-        <input asp-for="Password"
-               type="password" />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
     </div>
+
+    <br />
 
     <button type="submit">
         Login
     </button>
 
 </form>
+
+<p>
+    Don't have an account?
+
+    <a asp-action="Register">
+        Register
+    </a>
+</p>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -16,7 +16,7 @@ namespace Blog.Sevices.MappingProfiles
         {
             CreateMap<Comment, GetCommentsDto>()
                 .ForMember(dest => dest.AuthorName,
-                 opt => opt.MapFrom(src => src.Author.UserName));
+                 opt => opt.MapFrom(src => src.Author.Name));
             CreateMap<CreateCommentDto, Comment>();
 
         }

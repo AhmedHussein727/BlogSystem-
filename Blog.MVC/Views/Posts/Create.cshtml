@@ -1,0 +1,64 @@
+﻿@model Blog.MVC.ViewModels.CreatePostViewModel
+@using Blog.Domain.Entities.Enums
+
+<h2>Create New Post</h2>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label asp-for="Post.Title"></label>
+        <input asp-for="Post.Title" />
+        <span asp-validation-for="Post.Title"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label asp-for="Post.Content"></label>
+        <textarea asp-for="Post.Content"
+                  rows="6">
+        </textarea>
+        <span asp-validation-for="Post.Content"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Category</label>
+
+        <select asp-for="Post.CategoryId"
+                asp-items="Model.Categories">
+
+            <option value="">
+                Select Category
+            </option>
+
+        </select>
+
+        <span asp-validation-for="Post.CategoryId"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Status</label>
+
+        <select asp-for="Post.Status"
+                asp-items="Html.GetEnumSelectList<Status>()">
+        </select>
+
+        <span asp-validation-for="Post.Status"></span>
+    </div>
+
+    <br />
+
+    <button type="submit">
+        Create Post
+    </button>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
