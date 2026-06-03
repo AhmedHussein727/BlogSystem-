@@ -1,4 +1,4 @@
-﻿using Blog.MVC.DTOs;
+﻿using Blog.MVC.DTOs.Account;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 

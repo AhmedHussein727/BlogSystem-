@@ -1,4 +1,7 @@
-﻿using Blog.MVC.DTOs;
+﻿using Blog.MVC.DTOs.Account;
+using Blog.MVC.DTOs.Category;
+using Blog.MVC.DTOs.Comments;
+using Blog.MVC.DTOs.Posts;
 using Blog.MVC.ServicesAbstraction;
 using Blog.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;

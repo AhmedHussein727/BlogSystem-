@@ -1,4 +1,4 @@
-﻿namespace Blog.MVC.DTOs
+﻿namespace Blog.MVC.DTOs.Category
 {
     public class CategoryDTO
     {

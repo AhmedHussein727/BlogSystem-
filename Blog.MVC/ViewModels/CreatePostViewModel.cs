@@ -1,4 +1,4 @@
-﻿using Blog.MVC.DTOs;
+﻿using Blog.MVC.DTOs.Posts;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Blog.MVC.ViewModels

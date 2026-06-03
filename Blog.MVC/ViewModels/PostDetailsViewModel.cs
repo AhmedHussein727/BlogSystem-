@@ -1,4 +1,5 @@
-﻿using Blog.MVC.DTOs;
+﻿using Blog.MVC.DTOs.Comments;
+using Blog.MVC.DTOs.Posts;
 
 namespace Blog.MVC.ViewModels
 {

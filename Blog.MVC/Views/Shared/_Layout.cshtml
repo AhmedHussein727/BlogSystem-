@@ -74,6 +74,25 @@
                             </li>
                         }
 
+                        @if (role == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-controller="Categories"
+                                   asp-action="Index">
+                                    Categories
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"
+                                   asp-controller="Dashboard"
+                                   asp-action="Index">
+                                    Dashboard
+                                </a>
+                            </li>
+                        }
+
                     </ul>
 
                     <ul class="navbar-nav">

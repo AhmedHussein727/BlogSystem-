@@ -1,0 +1,56 @@
+﻿@model List<Blog.MVC.DTOs.Category. CategoryDTO>
+
+<h1>Categories</h1>
+
+<a asp-action="Create"
+   class="btn btn-success mb-3">
+    Create Category
+</a>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var category in Model)
+        {
+            <tr>
+
+                <td>
+                    @category.Name
+                </td>
+
+                <td>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@category.Id"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <form asp-action="Delete"
+                          asp-route-id="@category.Id"
+                          method="post"
+                          class="d-inline">
+
+                        <button type="submit"
+                                class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

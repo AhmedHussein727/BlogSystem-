@@ -1,6 +1,6 @@
 ﻿using Blog.Domain.Entities.Enums;
 
-namespace Blog.MVC.DTOs
+namespace Blog.MVC.DTOs.Posts
 {
     public class BlogPostDto
     {

@@ -24,6 +24,8 @@ namespace Blog.MVC
                 ITokenParserService,
                 TokenParserService>();
 
+           
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

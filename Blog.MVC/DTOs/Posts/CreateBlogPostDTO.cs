@@ -1,7 +1,7 @@
 ﻿using Blog.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace Blog.MVC.DTOs
+namespace Blog.MVC.DTOs.Posts
 {
     public class CreateBlogPostDTO
     {
