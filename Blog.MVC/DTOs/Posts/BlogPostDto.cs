@@ -1,12 +1,6 @@
-﻿using Blog.Domain.Entities;
-using Blog.Domain.Entities.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blog.Domain.Entities.Enums;
 
-namespace Blog.Shared.DTOs.PostsDTOs
+namespace Blog.MVC.DTOs.Posts
 {
     public class BlogPostDto
     {
@@ -18,11 +12,8 @@ namespace Blog.Shared.DTOs.PostsDTOs
 
         public int CategoryId { get; set; }
 
-        public string? CategoryName { get; set; }
+        public string CategoryName { get; set; } = default!;
 
         public Status Status { get; set; }
     }
-
-
-
 }

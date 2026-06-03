@@ -1,4 +1,5 @@
 ﻿@model Blog.MVC.ViewModels.PostDetailsViewModel
+@inject Blog.MVC.ServicesAbstraction.ITokenParserService TokenParser
 
 <h1>@Model.Post.Title</h1>
 
@@ -39,7 +40,7 @@
 </form>
 @if (Model.Comments.Any())
 {
-    foreach (var comment in Model.Comments)
+    @foreach (var comment in Model.Comments)
     {
         <div style="margin-bottom:15px">
 
@@ -50,6 +51,27 @@
             <p>
                 @comment.Content
             </p>
+
+            @if (TokenParser.IsLoggedIn())
+            {
+                <form asp-action="DeleteComment"
+                      method="post"
+                      style="display:inline">
+
+                    <input type="hidden"
+                           name="commentId"
+                           value="@comment.Id" />
+
+                    <input type="hidden"
+                           name="postId"
+                           value="@Model.Post.Id" />
+
+                    <button type="submit">
+                        Delete Comment
+                    </button>
+
+                </form>
+            }
 
         </div>
     }

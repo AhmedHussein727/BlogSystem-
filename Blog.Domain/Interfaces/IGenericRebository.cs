@@ -23,6 +23,7 @@ namespace Blog.Domain.Interfaces
         void Delete(TEntity entity);
 
         Task<int> CountAsync(ISpecifications<TEntity, Tkey> specifications);
+        Task<int> CountAsync();
 
     }
 }

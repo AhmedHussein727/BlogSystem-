@@ -71,5 +71,11 @@ namespace Blog.Presistance.Rebositories
                 .CreateQuery(_DbContext.Set<TEntity>(), specifications) //_dbContext.Products.where(P=>P.BrandId==2)
                 .CountAsync();
         }
+
+        public async Task<int> CountAsync()
+        {
+            return await _DbContext.Set<TEntity>()
+                .CountAsync();
+        }
     }
 }
