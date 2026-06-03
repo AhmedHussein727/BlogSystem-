@@ -21,19 +21,42 @@ namespace Blog.MVC.Controllers
             _tokenService = tokenService;
         }
         public async Task<IActionResult> Index(
+            string? categoryName,
+            string? status,
             int pageIndex = 1)
         {
+            var url =
+                $"BlogPosts?pageIndex={pageIndex}&pageSize=5";
+
+            if (!string.IsNullOrWhiteSpace(categoryName))
+                url += $"&categoryName={categoryName}";
+
+            if (!string.IsNullOrWhiteSpace(status))
+                url += $"&status={status}";
+
             var response = await _httpClient
                 .GetFromJsonAsync<
-                    PaginationResponse<BlogPostDto>>
-                ($"BlogPosts?pageIndex={pageIndex}&pageSize=5");
+                    PaginationResponse<BlogPostDto>>(url);
+            var categories =
+    await _httpClient.GetFromJsonAsync<
+        List<CategoryDTO>>("Categories");
 
             var vm = new PostsIndexViewModel
             {
                 Posts = response!.Data,
                 PageIndex = response.PageIndex,
                 PageSize = response.PageSize,
-                Count = response.Count
+                Count = response.Count,
+
+                CategoryName = categoryName,
+                Status = status,
+
+                Categories = categories!
+         .Select(c => new SelectListItem
+         {
+             Value = c.Name,
+             Text = c.Name
+         })
             };
 
             return View(vm);

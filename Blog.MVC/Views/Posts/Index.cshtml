@@ -9,79 +9,178 @@
 @if (TokenParser.GetRole() == "Admin"
 || TokenParser.GetRole() == "Editor")
 {
-    <a asp-action="Create">
+    <a asp-action="Create"
+       class="btn btn-success mb-3">
         Create New Post
     </a>
-
-    <hr />
 }
 
-@foreach (var post in Model.Posts)
-{
-    <div style="margin-bottom:20px">
+<hr />
 
-        <h2>@post.Title</h2>
+<form method="get"
+      asp-action="Index"
+      class="row g-3 mb-4">
 
-        <p>@post.Content</p>
+    <div class="col-md-4">
 
-        <a asp-action="Details"
-           asp-route-id="@post.Id">
-            Details
-        </a>
+        <select name="categoryName"
+                asp-items="Model.Categories"
+                class="form-select">
 
-        @if (TokenParser.GetRole() == "Admin"
-            || TokenParser.GetRole() == "Editor")
-        {
-            <text> | </text>
+            <option value="">
+                All Categories
+            </option>
 
-            <a asp-action="Edit"
-               asp-route-id="@post.Id">
-                Edit
-            </a>
-        }
-
-        @if (TokenParser.GetRole() == "Admin")
-        {
-            <text> | </text>
-
-            <form asp-action="Delete"
-                  asp-route-id="@post.Id"
-                  method="post"
-                  style="display:inline">
-
-                <button type="submit"
-                        onclick="return confirm('Are you sure?')">
-                    Delete
-                </button>
-
-            </form>
-        }
+        </select>
 
     </div>
 
-    <hr />
-}
+    <div class="col-md-4">
 
-<div>
+        <select name="status"
+                class="form-select">
 
-    @if (Model.PageIndex > 1)
+            <option value="">
+                All Statuses
+            </option>
+
+            <option value="Draft"
+                    selected="@(Model.Status == "Draft")">
+                Draft
+            </option>
+
+            <option value="Published"
+                    selected="@(Model.Status == "Published")">
+                Published
+            </option>
+
+            <option value="Archived"
+                    selected="@(Model.Status == "Archived")">
+                Archived
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button type="submit"
+                class="btn btn-primary w-100">
+            Filter
+        </button>
+
+    </div>
+
+</form>
+
+<hr />
+
+<div class="row">
+
+    @foreach (var post in Model.Posts)
     {
-        <a asp-action="Index"
-           asp-route-pageIndex="@(Model.PageIndex - 1)">
-            Previous
-        </a>
-    }
+        <div class="col-md-6 mb-4">
 
-    <span>
-        Page @Model.PageIndex
-    </span>
+            <div class="card shadow-sm">
 
-    @if (Model.PageIndex * Model.PageSize < Model.Count)
-    {
-        <a asp-action="Index"
-           asp-route-pageIndex="@(Model.PageIndex + 1)">
-            Next
-        </a>
+                <div class="card-body">
+
+                    <h4 class="card-title">
+                        @post.Title
+                    </h4>
+
+                    <p class="card-text">
+                        @post.Content
+                    </p>
+
+                    <a asp-action="Details"
+                       asp-route-id="@post.Id"
+                       class="btn btn-primary btn-sm">
+                        Details
+                    </a>
+
+                    @if (TokenParser.GetRole() == "Admin"
+                                    || TokenParser.GetRole() == "Editor")
+                    {
+                        <a asp-action="Edit"
+                           asp-route-id="@post.Id"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                    }
+
+                    @if (TokenParser.GetRole() == "Admin")
+                    {
+                        <form asp-action="Delete"
+                              asp-route-id="@post.Id"
+                              method="post"
+                              class="d-inline">
+
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure?')">
+                                Delete
+                            </button>
+
+                        </form>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
     }
 
 </div>
+
+<nav>
+
+    <ul class="pagination">
+
+        @if (Model.PageIndex > 1)
+        {
+            <li class="page-item">
+
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-pageIndex="@(Model.PageIndex - 1)"
+                   asp-route-categoryName="@Model.CategoryName"
+                   asp-route-status="@Model.Status">
+
+                    Previous
+
+                </a>
+
+            </li>
+        }
+
+        <li class="page-item active">
+
+            <span class="page-link">
+                @Model.PageIndex
+            </span>
+
+        </li>
+
+        @if (Model.PageIndex * Model.PageSize < Model.Count)
+        {
+            <li class="page-item">
+
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-pageIndex="@(Model.PageIndex + 1)"
+                   asp-route-categoryName="@Model.CategoryName"
+                   asp-route-status="@Model.Status">
+
+                    Next
+
+                </a>
+
+            </li>
+        }
+
+    </ul>
+
+</nav>
