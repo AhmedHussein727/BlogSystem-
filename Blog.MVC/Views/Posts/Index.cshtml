@@ -1,186 +1,120 @@
-﻿@using Blog.MVC.DTOs
+﻿@using Blog.Domain.Entities.Enums
+@using Blog.MVC.DTOs
 @using Blog.MVC.ViewModels
 @inject Blog.MVC.ServicesAbstraction.ITokenParserService TokenParser
 
 @model PostsIndexViewModel
 
-<h1>Posts</h1>
-
-@if (TokenParser.GetRole() == "Admin"
-|| TokenParser.GetRole() == "Editor")
-{
-    <a asp-action="Create"
-       class="btn btn-success mb-3">
-        Create New Post
-    </a>
+@{
+    ViewData["Title"] = "Posts";
+    var role = TokenParser.GetRole();
 }
 
-<hr />
-
-<form method="get"
-      asp-action="Index"
-      class="row g-3 mb-4">
-
-    <div class="col-md-4">
-
-        <select name="categoryName"
-                asp-items="Model.Categories"
-                class="form-select">
-
-            <option value="">
-                All Categories
-            </option>
-
-        </select>
-
+<div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+    <div>
+        <h1 class="page-title">Latest Posts</h1>
+        <p class="page-subtitle">Explore articles, stories and ideas</p>
     </div>
-
-    <div class="col-md-4">
-
-        <select name="status"
-                class="form-select">
-
-            <option value="">
-                All Statuses
-            </option>
-
-            <option value="Draft"
-                    selected="@(Model.Status == "Draft")">
-                Draft
-            </option>
-
-            <option value="Published"
-                    selected="@(Model.Status == "Published")">
-                Published
-            </option>
-
-            <option value="Archived"
-                    selected="@(Model.Status == "Archived")">
-                Archived
-            </option>
-
-        </select>
-
-    </div>
-
-    <div class="col-md-2">
-
-        <button type="submit"
-                class="btn btn-primary w-100">
-            Filter
-        </button>
-
-    </div>
-
-</form>
-
-<hr />
-
-<div class="row">
-
-    @foreach (var post in Model.Posts)
+    @if (role == "Admin" || role == "Editor")
     {
-        <div class="col-md-6 mb-4">
-
-            <div class="card shadow-sm">
-
-                <div class="card-body">
-
-                    <h4 class="card-title">
-                        @post.Title
-                    </h4>
-
-                    <p class="card-text">
-                        @post.Content
-                    </p>
-
-                    <a asp-action="Details"
-                       asp-route-id="@post.Id"
-                       class="btn btn-primary btn-sm">
-                        Details
-                    </a>
-
-                    @if (TokenParser.GetRole() == "Admin"
-                                    || TokenParser.GetRole() == "Editor")
-                    {
-                        <a asp-action="Edit"
-                           asp-route-id="@post.Id"
-                           class="btn btn-warning btn-sm">
-                            Edit
-                        </a>
-                    }
-
-                    @if (TokenParser.GetRole() == "Admin")
-                    {
-                        <form asp-action="Delete"
-                              asp-route-id="@post.Id"
-                              method="post"
-                              class="d-inline">
-
-                            <button type="submit"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure?')">
-                                Delete
-                            </button>
-
-                        </form>
-                    }
-
-                </div>
-
-            </div>
-
-        </div>
+        <a asp-action="Create" class="btn-gold">
+            <i class="fas fa-plus"></i> New Post
+        </a>
     }
-
 </div>
 
-<nav>
+<form method="get" asp-action="Index" style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+    <select name="categoryName" asp-items="Model.Categories" class="form-select-dark" style="max-width:220px;">
+        <option value="">All Categories</option>
+    </select>
+    <select name="status" class="form-select-dark" style="max-width:180px;">
+        <option value="">All Statuses</option>
+        <option value="Draft" selected="@(Model.Status == "Draft")">Draft</option>
+        <option value="Published" selected="@(Model.Status == "Published")">Published</option>
+        <option value="Archived" selected="@(Model.Status == "Archived")">Archived</option>
+    </select>
+    <button type="submit" class="btn-gold"><i class="fas fa-filter"></i> Filter</button>
+</form>
 
-    <ul class="pagination">
+<hr class="divider" />
 
-        @if (Model.PageIndex > 1)
+@if (!Model.Posts.Any())
+{
+    <div style="text-align:center; padding:4rem 0; color:var(--muted);">
+        <i class="fas fa-newspaper" style="font-size:3rem; margin-bottom:1rem; display:block; opacity:0.3;"></i>
+        <p>No posts found. Try adjusting your filters.</p>
+    </div>
+}
+else
+{
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap:1.5rem;">
+        @foreach (var post in Model.Posts)
         {
-            <li class="page-item">
-
-                <a class="page-link"
-                   asp-action="Index"
-                   asp-route-pageIndex="@(Model.PageIndex - 1)"
-                   asp-route-categoryName="@Model.CategoryName"
-                   asp-route-status="@Model.Status">
-
-                    Previous
-
-                </a>
-
-            </li>
+            <div class="card-dark" style="display:flex; flex-direction:column; justify-content:space-between;">
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                        <span class="badge-status @(post.Status == Status.Published ? "badge-published" : post.Status == Status.Draft ? "badge-draft" : "badge-archived")">
+                            @post.Status
+                        </span>
+                        <span style="font-size:0.75rem; color:var(--muted);">
+                            <i class="fas fa-tag"></i> @post.CategoryName
+                        </span>
+                    </div>
+                    <div style="font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem;">
+                        <i class="fas fa-user"></i> @post.AuthorName
+                    </div>
+                    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:0.6rem; line-height:1.4;">
+                        @post.Title
+                    </h3>
+                    <p style="color:var(--muted); font-size:0.875rem; line-height:1.6; margin-bottom:1.25rem;">
+                        @(post.Content?.Length > 120 ? post.Content.Substring(0, 120) + "..." : post.Content)
+                    </p>
+                </div>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <a asp-action="Details" asp-route-id="@post.Id" class="btn-outline" style="font-size:0.8rem; padding:0.4rem 0.9rem;">
+                        <i class="fas fa-eye"></i> Read
+                    </a>
+                    @if (role == "Admin" || role == "Editor")
+                    {
+                        <a asp-action="Edit" asp-route-id="@post.Id" class="btn-warning-soft">
+                            <i class="fas fa-pen"></i> Edit
+                        </a>
+                    }
+                    @if (role == "Admin")
+                    {
+                        <form asp-action="Delete" asp-route-id="@post.Id" method="post" style="display:inline;"
+                              onsubmit="return confirm('Delete this post permanently?')">
+                            <button type="submit" class="btn-danger-soft">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
         }
+    </div>
+}
 
-        <li class="page-item active">
-
-            <span class="page-link">
-                @Model.PageIndex
-            </span>
-
-        </li>
-
-        @if (Model.PageIndex * Model.PageSize < Model.Count)
-        {
-            <li class="page-item">
-
-                <a class="page-link"
-                   asp-action="Index"
-                   asp-route-pageIndex="@(Model.PageIndex + 1)"
-                   asp-route-categoryName="@Model.CategoryName"
-                   asp-route-status="@Model.Status">
-
-                    Next
-
-                </a>
-
-            </li>
-        }
-
-    </ul>
-
-</nav>
+<div class="pagination-custom">
+    @if (Model.PageIndex > 1)
+    {
+        <a class="page-btn"
+           asp-action="Index"
+           asp-route-pageIndex="@(Model.PageIndex - 1)"
+           asp-route-categoryName="@Model.CategoryName"
+           asp-route-status="@Model.Status">
+            <i class="fas fa-chevron-left"></i> Prev
+        </a>
+    }
+    <span class="page-btn active">@Model.PageIndex</span>
+    @if (Model.PageIndex * Model.PageSize < Model.Count)
+    {
+        <a class="page-btn"
+           asp-action="Index"
+           asp-route-pageIndex="@(Model.PageIndex + 1)"
+           asp-route-categoryName="@Model.CategoryName"
+           asp-route-status="@Model.Status">
+            Next <i class="fas fa-chevron-right"></i>
+        </a>
+    }
+</div>

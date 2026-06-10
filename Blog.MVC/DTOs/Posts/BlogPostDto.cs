@@ -13,6 +13,7 @@ namespace Blog.MVC.DTOs.Posts
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; } = default!;
+        public string AuthorName { get; set; } = default!;
 
         public Status Status { get; set; }
     }

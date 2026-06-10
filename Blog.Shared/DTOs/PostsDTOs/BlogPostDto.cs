@@ -20,6 +20,8 @@ namespace Blog.Shared.DTOs.PostsDTOs
 
         public string? CategoryName { get; set; }
 
+        public string? AuthorName { get; set; }
+
         public Status Status { get; set; }
     }
 

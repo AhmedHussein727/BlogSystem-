@@ -44,12 +44,34 @@ namespace Blog.Sevices
             var users =
                 _userManager.Users.Count();
 
+            var recentPosts =
+            (await _unitOfWork
+            .GetRepository<BlogPost, int>()
+            .GetAllAsync())
+            .OrderByDescending(x => x.CreatedAt)
+            .Take(5)
+            .Select(x => x.Title)
+            .ToList();
+
+            var recentCategories =
+                (await _unitOfWork
+                    .GetRepository<Category, int>()
+                    .GetAllAsync())
+                .Take(5)
+                .Select(x => x.Name)
+                .ToList();
+
+
+
             return new DashboardDto
             {
                 TotalPosts = posts,
                 TotalComments = comments,
                 TotalCategories = categories,
-                TotalUsers = users
+                TotalUsers = users,
+
+                RecentPosts = recentPosts,
+                RecentCategories = recentCategories
             };
         }
 

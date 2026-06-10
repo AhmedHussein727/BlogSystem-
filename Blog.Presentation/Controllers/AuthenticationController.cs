@@ -52,5 +52,13 @@ namespace Blog.Presentation.Controllers
 
             return Ok(result);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("users")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var result = await _authenticationService.GetAllUsersAsync();
+            return Ok(result);
+        }
     }
 }

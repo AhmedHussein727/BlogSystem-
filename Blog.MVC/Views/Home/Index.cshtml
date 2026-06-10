@@ -1,8 +1,73 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- HERO -->
+<div style="text-align:center; padding:5rem 1rem 4rem; position:relative;">
+    <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+
+    <p style="font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--gold); margin-bottom:1rem;">
+        Welcome to
+    </p>
+
+    <h1 style="font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; line-height:1.1; margin-bottom:1.5rem;">
+        Blog<span style="color:var(--gold);">System</span>
+    </h1>
+
+    <p style="color:var(--muted); font-size:1.1rem; max-width:520px; margin:0 auto 2.5rem; line-height:1.7;">
+        A place for ideas, stories, and thoughtful writing. Explore articles across topics that matter.
+    </p>
+
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a asp-controller="Posts" asp-action="Index" class="btn-gold" style="padding:0.8rem 2rem; font-size:1rem;">
+            <i class="fas fa-newspaper"></i> Browse Posts
+        </a>
+        <a asp-controller="Account" asp-action="Register" class="btn-outline" style="padding:0.8rem 2rem; font-size:1rem;">
+            <i class="fas fa-user-plus"></i> Join Free
+        </a>
+    </div>
+</div>
+
+<hr class="divider" />
+
+<!-- FEATURES -->
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.25rem; margin:3rem 0;">
+
+    <div class="card-dark" style="text-align:center; padding:2rem;">
+        <div style="font-size:1.75rem; color:var(--gold); margin-bottom:1rem;">
+            <i class="fas fa-pen-nib"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Write & Publish</h3>
+        <p style="color:var(--muted); font-size:0.875rem; line-height:1.6;">Create and share articles with a clean, distraction-free editor.</p>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem;">
+        <div style="font-size:1.75rem; color:#4caf7d; margin-bottom:1rem;">
+            <i class="fas fa-tags"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Organized by Category</h3>
+        <p style="color:var(--muted); font-size:0.875rem; line-height:1.6;">Find exactly what you're looking for with smart filtering.</p>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem;">
+        <div style="font-size:1.75rem; color:#6c9ee0; margin-bottom:1rem;">
+            <i class="fas fa-comments"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Join the Conversation</h3>
+        <p style="color:var(--muted); font-size:0.875rem; line-height:1.6;">Comment on posts and engage with writers and readers.</p>
+    </div>
+
+</div>
+
+<hr class="divider" />
+
+<!-- CTA -->
+<div style="text-align:center; padding:3rem 1rem;">
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; margin-bottom:0.75rem;">
+        Ready to start reading?
+    </h2>
+    <p style="color:var(--muted); margin-bottom:2rem;">Explore all published posts and discover new ideas.</p>
+    <a asp-controller="Posts" asp-action="Index" class="btn-gold" style="padding:0.8rem 2.5rem; font-size:1rem;">
+        <i class="fas fa-arrow-right"></i> Explore Posts
+    </a>
 </div>
