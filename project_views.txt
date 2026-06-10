@@ -1,0 +1,1240 @@
+﻿=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\_ViewImports.cshtml ===
+@using Blog.MVC
+@using Blog.MVC.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\_ViewStart.cshtml ===
+@{
+    Layout = "_Layout";
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Account\Index.cshtml ===
+@using Blog.MVC.DTOs.Account
+@model RegisterDto
+
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label asp-for="DisplayName"></label>
+        <input asp-for="DisplayName" />
+        <span asp-validation-for="DisplayName"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password"
+               type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <br />
+
+    <button type="submit">
+        Register
+    </button>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Account\Login.cshtml ===
+@using Blog.MVC.DTOs
+@using Blog.MVC.DTOs.Account
+@model LoginDto
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div style="min-height:75vh; display:flex; align-items:center; justify-content:center;">
+    <div style="width:100%; max-width:420px;">
+
+        <div style="text-align:center; margin-bottom:2rem;">
+            <h1 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--gold);">BlogSystem</h1>
+            <p style="color:var(--muted); font-size:0.9rem; margin-top:0.25rem;">Sign in to your account</p>
+        </div>
+
+        <div class="card-dark">
+            <div asp-validation-summary="All" class="alert-dark"></div>
+
+            <form asp-action="Login" method="post">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-input" placeholder="you@example.com" type="email" />
+                    <span asp-validation-for="Email" class="field-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input asp-for="Password" class="form-input" placeholder="••••••••" type="password" />
+                    <span asp-validation-for="Password" class="field-error"></span>
+                </div>
+
+                <button type="submit" class="btn-gold" style="width:100%; justify-content:center; padding:0.75rem; font-size:1rem; margin-top:0.5rem;">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+        </div>
+
+        <p style="text-align:center; margin-top:1.25rem; color:var(--muted); font-size:0.875rem;">
+            Don't have an account?
+            <a asp-action="Register" style="color:var(--gold); text-decoration:none; font-weight:600;">Register</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Account\Register.cshtml ===
+@using Blog.MVC.DTOs.Account
+@model RegisterDto
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div style="min-height:75vh; display:flex; align-items:center; justify-content:center;">
+    <div style="width:100%; max-width:460px;">
+
+        <div style="text-align:center; margin-bottom:2rem;">
+            <h1 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--gold);">BlogSystem</h1>
+            <p style="color:var(--muted); font-size:0.9rem; margin-top:0.25rem;">Create your account</p>
+        </div>
+
+        <div class="card-dark">
+            <form asp-action="Register" method="post">
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-input" placeholder="you@example.com" type="email" />
+                    <span asp-validation-for="Email" class="field-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Display Name</label>
+                    <input asp-for="DisplayName" class="form-input" placeholder="Your name" />
+                    <span asp-validation-for="DisplayName" class="field-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input asp-for="Password" class="form-input" placeholder="••••••••" type="password" />
+                    <span asp-validation-for="Password" class="field-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input asp-for="PhoneNumber" class="form-input" placeholder="+20 1xx xxx xxxx" />
+                    <span asp-validation-for="PhoneNumber" class="field-error"></span>
+                </div>
+
+                <button type="submit" class="btn-gold" style="width:100%; justify-content:center; padding:0.75rem; font-size:1rem; margin-top:0.5rem;">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+        </div>
+
+        <p style="text-align:center; margin-top:1.25rem; color:var(--muted); font-size:0.875rem;">
+            Already have an account?
+            <a asp-action="Login" style="color:var(--gold); text-decoration:none; font-weight:600;">Sign In</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Categories\Create.cshtml ===
+@model Blog.MVC.DTOs.Category.CreateCategoryDto
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<div style="max-width:480px; margin:0 auto;">
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Categories
+    </a>
+
+    <h1 class="page-title">New Category</h1>
+    <p class="page-subtitle">Add a new category to organize posts</p>
+
+    <div class="card-dark" style="margin-top:1.5rem;">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label class="form-label">Category Name</label>
+                <input asp-for="Name" class="form-input" placeholder="e.g. Technology, Travel..." />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+            <div style="display:flex; gap:1rem;">
+                <button type="submit" class="btn-gold">
+                    <i class="fas fa-plus"></i> Create
+                </button>
+                <a asp-action="Index" class="btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Categories\Edit.cshtml ===
+@model Blog.MVC.DTOs.Category.UpdateCategoryDto
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div style="max-width:480px; margin:0 auto;">
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Categories
+    </a>
+
+    <h1 class="page-title">Edit Category</h1>
+    <p class="page-subtitle">Update the category name</p>
+
+    <div class="card-dark" style="margin-top:1.5rem;">
+        <form asp-action="Edit" method="post">
+            <div class="form-group">
+                <label class="form-label">Category Name</label>
+                <input asp-for="Name" class="form-input" />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+            <div style="display:flex; gap:1rem;">
+                <button type="submit" class="btn-gold">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a asp-action="Index" class="btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Categories\Index.cshtml ===
+@model List<Blog.MVC.DTOs.Category.CategoryDTO>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+    <div>
+        <h1 class="page-title">Categories</h1>
+        <p class="page-subtitle">Manage your blog categories</p>
+    </div>
+    <a asp-action="Create" class="btn-gold">
+        <i class="fas fa-plus"></i> New Category
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div style="text-align:center; padding:4rem 0; color:var(--muted);">
+        <i class="fas fa-tags" style="font-size:3rem; margin-bottom:1rem; display:block; opacity:0.3;"></i>
+        <p>No categories yet. Create your first one!</p>
+    </div>
+}
+else
+{
+    <div class="card-dark" style="padding:0; overflow:hidden;">
+        <table class="table-dark-custom">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Category Name</th>
+                    <th style="text-align:right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td style="color:var(--muted); width:50px;">@i</td>
+                        <td>
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-tag" style="color:var(--gold); font-size:0.8rem;"></i>
+                                <span style="font-weight:500;">@category.Name</span>
+                            </div>
+                        </td>
+                        <td style="text-align:right;">
+                            <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
+                                <a asp-action="Edit" asp-route-id="@category.Id" class="btn-warning-soft">
+                                    <i class="fas fa-pen"></i> Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@category.Id" method="post" style="display:inline;"
+                                      onsubmit="return confirm('Delete category @category.Name?')">
+                                    <button type="submit" class="btn-danger-soft">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Dashboard\Index.cshtml ===
+@model Blog.MVC.DTOs.Dashboard.DashboardDTO
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="page-title">Dashboard</h1>
+<p class="page-subtitle">Overview of your blog performance</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:1.25rem; margin-top:2rem;">
+
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:var(--gold); margin-bottom:0.75rem;">
+            <i class="fas fa-newspaper"></i>
+        </div>
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalPosts
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Posts
+        </div>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:#4caf7d; margin-bottom:0.75rem;">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalComments
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Comments
+        </div>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:#e0a852; margin-bottom:0.75rem;">
+            <i class="fas fa-tags"></i>
+        </div>
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalCategories
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Categories
+        </div>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:#6c9ee0; margin-bottom:0.75rem;">
+            <i class="fas fa-users"></i>
+        </div>
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalUsers
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Users
+        </div>
+    </div>
+
+</div>
+
+<hr class="divider" style="margin-top:2.5rem;" />
+
+<div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+    <a asp-controller="Posts" asp-action="Index" class="btn-outline">
+        <i class="fas fa-newspaper"></i> Manage Posts
+    </a>
+    <a asp-controller="Categories" asp-action="Index" class="btn-outline">
+        <i class="fas fa-tags"></i> Manage Categories
+    </a>
+    <a asp-controller="Posts" asp-action="Create" class="btn-gold">
+        <i class="fas fa-plus"></i> New Post
+    </a>
+</div>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Home\Index.cshtml ===
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- HERO -->
+<div style="text-align:center; padding:5rem 1rem 4rem; position:relative;">
+    <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+
+    <p style="font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--gold); margin-bottom:1rem;">
+        Welcome to
+    </p>
+
+    <h1 style="font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; line-height:1.1; margin-bottom:1.5rem;">
+        Blog<span style="color:var(--gold);">System</span>
+    </h1>
+
+    <p style="color:var(--muted); font-size:1.1rem; max-width:520px; margin:0 auto 2.5rem; line-height:1.7;">
+        A place for ideas, stories, and thoughtful writing. Explore articles across topics that matter.
+    </p>
+
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a asp-controller="Posts" asp-action="Index" class="btn-gold" style="padding:0.8rem 2rem; font-size:1rem;">
+            <i class="fas fa-newspaper"></i> Browse Posts
+        </a>
+        <a asp-controller="Account" asp-action="Register" class="btn-outline" style="padding:0.8rem 2rem; font-size:1rem;">
+            <i class="fas fa-user-plus"></i> Join Free
+        </a>
+    </div>
+</div>
+
+<hr class="divider" />
+
+<!-- FEATURES -->
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.25rem; margin:3rem 0;">
+
+    <div class="card-dark" style="text-align:center; padding:2rem;">
+        <div style="font-size:1.75rem; color:var(--gold); margin-bottom:1rem;">
+            <i class="fas fa-pen-nib"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Write & Publish</h3>
+        <p style="color:var(--muted); font-size:0.875rem; line-height:1.6;">Create and share articles with a clean, distraction-free editor.</p>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem;">
+        <div style="font-size:1.75rem; color:#4caf7d; margin-bottom:1rem;">
+            <i class="fas fa-tags"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Organized by Category</h3>
+        <p style="color:var(--muted); font-size:0.875rem; line-height:1.6;">Find exactly what you're looking for with smart filtering.</p>
+    </div>
+
+    <div class="card-dark" style="text-align:center; padding:2rem;">
+        <div style="font-size:1.75rem; color:#6c9ee0; margin-bottom:1rem;">
+            <i class="fas fa-comments"></i>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Join the Conversation</h3>
+        <p style="color:var(--muted); font-size:0.875rem; line-height:1.6;">Comment on posts and engage with writers and readers.</p>
+    </div>
+
+</div>
+
+<hr class="divider" />
+
+<!-- CTA -->
+<div style="text-align:center; padding:3rem 1rem;">
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; margin-bottom:0.75rem;">
+        Ready to start reading?
+    </h2>
+    <p style="color:var(--muted); margin-bottom:2rem;">Explore all published posts and discover new ideas.</p>
+    <a asp-controller="Posts" asp-action="Index" class="btn-gold" style="padding:0.8rem 2.5rem; font-size:1rem;">
+        <i class="fas fa-arrow-right"></i> Explore Posts
+    </a>
+</div>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Home\Privacy.cshtml ===
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div style="max-width:720px; margin:0 auto;">
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="page-subtitle">Last updated: January 2026</p>
+
+    <hr class="divider" />
+
+    <div class="card-dark" style="margin-bottom:1.25rem;">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); margin-bottom:0.75rem;">
+            <i class="fas fa-database"></i> Data We Collect
+        </h3>
+        <p style="color:var(--muted); font-size:0.9rem; line-height:1.7;">
+            We collect your email address, display name, and phone number when you register. We also store the posts and comments you create on the platform.
+        </p>
+    </div>
+
+    <div class="card-dark" style="margin-bottom:1.25rem;">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); margin-bottom:0.75rem;">
+            <i class="fas fa-lock"></i> How We Use It
+        </h3>
+        <p style="color:var(--muted); font-size:0.9rem; line-height:1.7;">
+            Your data is used solely to provide the BlogSystem service. We do not sell or share your personal information with third parties.
+        </p>
+    </div>
+
+    <div class="card-dark">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); margin-bottom:0.75rem;">
+            <i class="fas fa-cookie"></i> Cookies
+        </h3>
+        <p style="color:var(--muted); font-size:0.9rem; line-height:1.7;">
+            We use an HttpOnly cookie to store your authentication token securely. This cookie expires after 7 days and is never accessible via JavaScript.
+        </p>
+    </div>
+</div>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Posts\Create.cshtml ===
+@model Blog.MVC.ViewModels.CreatePostViewModel
+@using Blog.Domain.Entities.Enums
+
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<div style="max-width:720px; margin:0 auto;">
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Posts
+    </a>
+
+    <h1 class="page-title">Create New Post</h1>
+    <p class="page-subtitle">Write and publish a new article</p>
+
+    <div class="card-dark" style="margin-top:1.5rem;">
+        <form asp-action="Create" method="post">
+
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input asp-for="Post.Title" class="form-input" placeholder="Enter post title..." />
+                <span asp-validation-for="Post.Title" class="field-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Content</label>
+                <textarea asp-for="Post.Content" class="form-textarea" rows="10" placeholder="Write your content here..."></textarea>
+                <span asp-validation-for="Post.Content" class="field-error"></span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select asp-for="Post.CategoryId" asp-items="Model.Categories" class="form-select-dark">
+                        <option value="">Select Category</option>
+                    </select>
+                    <span asp-validation-for="Post.CategoryId" class="field-error"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select asp-for="Post.Status" asp-items="Html.GetEnumSelectList<Status>()" class="form-select-dark"></select>
+                    <span asp-validation-for="Post.Status" class="field-error"></span>
+                </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div style="display:flex; gap:1rem;">
+                <button type="submit" class="btn-gold">
+                    <i class="fas fa-paper-plane"></i> Publish Post
+                </button>
+                <a asp-action="Index" class="btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Posts\Details.cshtml ===
+@using Blog.Domain.Entities.Enums
+@model Blog.MVC.ViewModels.PostDetailsViewModel
+@inject Blog.MVC.ServicesAbstraction.ITokenParserService TokenParser
+
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
+
+<div style="max-width:800px; margin:0 auto;">
+
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Posts
+    </a>
+
+    <div style="margin-bottom:1rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+        <span class="badge-status @(Model.Post.Status == Status.Published ? "badge-published" : Model.Post.Status == Status.Draft ? "badge-draft" : "badge-archived")">
+            @Model.Post.Status
+        </span>
+        <span style="font-size:0.8rem; color:var(--muted);"><i class="fas fa-tag"></i> @Model.Post.CategoryName</span>
+        <span style="font-size:0.8rem; color:var(--muted);"><i class="fas fa-user"></i> @Model.Post.AuthorName</span>
+    </div>
+
+    <h1 style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; line-height:1.2; margin-bottom:2rem;">
+        @Model.Post.Title
+    </h1>
+
+    <hr class="divider" />
+
+    <div style="color:var(--text); line-height:1.9; font-size:1.05rem; margin-bottom:3rem; white-space:pre-wrap;">
+        @Model.Post.Content
+    </div>
+
+    <hr class="divider" />
+
+    <!-- COMMENTS SECTION -->
+    <div style="margin-top:2rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:1.5rem;">
+            <i class="fas fa-comments" style="color:var(--gold);"></i>
+            Comments (@Model.Comments.Count())
+        </h2>
+
+        @if (TokenParser.IsLoggedIn())
+        {
+            <div class="card-dark" style="margin-bottom:2rem;">
+                <h4 style="font-size:0.9rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1rem;">
+                    Leave a Comment
+                </h4>
+                <form asp-action="CreateComment" method="post">
+                    <input type="hidden" asp-for="CreateComment.PostId" value="@Model.Post.Id" />
+                    <div class="form-group">
+                        <textarea asp-for="CreateComment.Content"
+                                  class="form-textarea"
+                                  rows="4"
+                                  placeholder="Share your thoughts..."></textarea>
+                        <span asp-validation-for="CreateComment.Content" class="field-error"></span>
+                    </div>
+                    <button type="submit" class="btn-gold">
+                        <i class="fas fa-paper-plane"></i> Post Comment
+                    </button>
+                </form>
+            </div>
+        }
+
+        @if (Model.Comments.Any())
+        {
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="card-dark" style="padding:1.25rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <div style="width:32px; height:32px; border-radius:50%; background:var(--border); display:flex; align-items:center; justify-content:center; font-size:0.8rem; color:var(--gold); font-weight:700;">
+                                    @comment.AuthorName?.FirstOrDefault()
+                                </div>
+                                <strong style="font-size:0.9rem;">@comment.AuthorName</strong>
+                            </div>
+                            @if (TokenParser.IsLoggedIn())
+                            {
+                                <form asp-action="DeleteComment" method="post" style="display:inline;"
+                                      onsubmit="return confirm('Delete this comment?')">
+                                    <input type="hidden" name="commentId" value="@comment.Id" />
+                                    <input type="hidden" name="postId" value="@Model.Post.Id" />
+                                    <button type="submit" class="btn-danger-soft" style="padding:0.25rem 0.6rem; font-size:0.75rem;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            }
+                        </div>
+                        <p style="color:var(--text); font-size:0.9rem; line-height:1.6; margin:0;">@comment.Content</p>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div style="text-align:center; padding:3rem 0; color:var(--muted);">
+                <i class="fas fa-comment-slash" style="font-size:2rem; margin-bottom:0.75rem; display:block; opacity:0.3;"></i>
+                <p>No comments yet. Be the first to comment!</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Posts\Edit.cshtml ===
+@model Blog.MVC.ViewModels.EditPostViewModel
+@using Blog.Domain.Entities.Enums
+
+@{
+    ViewData["Title"] = "Edit Post";
+}
+
+<div style="max-width:720px; margin:0 auto;">
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Posts
+    </a>
+
+    <h1 class="page-title">Edit Post</h1>
+    <p class="page-subtitle">Update your article content and settings</p>
+
+    <div class="card-dark" style="margin-top:1.5rem;">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input asp-for="Post.Title" class="form-input" placeholder="Enter post title..." />
+                <span asp-validation-for="Post.Title" class="field-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Content</label>
+                <textarea asp-for="Post.Content" class="form-textarea" rows="10" placeholder="Write your content here..."></textarea>
+                <span asp-validation-for="Post.Content" class="field-error"></span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select asp-for="Post.CategoryId" asp-items="Model.Categories" class="form-select-dark"></select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select asp-for="Post.Status" asp-items="Html.GetEnumSelectList<Status>()" class="form-select-dark"></select>
+                </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div style="display:flex; gap:1rem;">
+                <button type="submit" class="btn-gold">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a asp-action="Index" class="btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Posts\Index.cshtml ===
+@using Blog.Domain.Entities.Enums
+@using Blog.MVC.DTOs
+@using Blog.MVC.ViewModels
+@inject Blog.MVC.ServicesAbstraction.ITokenParserService TokenParser
+
+@model PostsIndexViewModel
+
+@{
+    ViewData["Title"] = "Posts";
+    var role = TokenParser.GetRole();
+}
+
+<div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+    <div>
+        <h1 class="page-title">Latest Posts</h1>
+        <p class="page-subtitle">Explore articles, stories and ideas</p>
+    </div>
+    @if (role == "Admin" || role == "Editor")
+    {
+        <a asp-action="Create" class="btn-gold">
+            <i class="fas fa-plus"></i> New Post
+        </a>
+    }
+</div>
+
+<form method="get" asp-action="Index" style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+    <select name="categoryName" asp-items="Model.Categories" class="form-select-dark" style="max-width:220px;">
+        <option value="">All Categories</option>
+    </select>
+    <select name="status" class="form-select-dark" style="max-width:180px;">
+        <option value="">All Statuses</option>
+        <option value="Draft" selected="@(Model.Status == "Draft")">Draft</option>
+        <option value="Published" selected="@(Model.Status == "Published")">Published</option>
+        <option value="Archived" selected="@(Model.Status == "Archived")">Archived</option>
+    </select>
+    <button type="submit" class="btn-gold"><i class="fas fa-filter"></i> Filter</button>
+</form>
+
+<hr class="divider" />
+
+@if (!Model.Posts.Any())
+{
+    <div style="text-align:center; padding:4rem 0; color:var(--muted);">
+        <i class="fas fa-newspaper" style="font-size:3rem; margin-bottom:1rem; display:block; opacity:0.3;"></i>
+        <p>No posts found. Try adjusting your filters.</p>
+    </div>
+}
+else
+{
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap:1.5rem;">
+        @foreach (var post in Model.Posts)
+        {
+            <div class="card-dark" style="display:flex; flex-direction:column; justify-content:space-between;">
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                        <span class="badge-status @(post.Status == Status.Published ? "badge-published" : post.Status == Status.Draft ? "badge-draft" : "badge-archived")">
+                            @post.Status
+                        </span>
+                        <span style="font-size:0.75rem; color:var(--muted);">
+                            <i class="fas fa-tag"></i> @post.CategoryName
+                        </span>
+                    </div>
+                    <div style="font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem;">
+                        <i class="fas fa-user"></i> @post.AuthorName
+                    </div>
+                    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:0.6rem; line-height:1.4;">
+                        @post.Title
+                    </h3>
+                    <p style="color:var(--muted); font-size:0.875rem; line-height:1.6; margin-bottom:1.25rem;">
+                        @(post.Content?.Length > 120 ? post.Content.Substring(0, 120) + "..." : post.Content)
+                    </p>
+                </div>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <a asp-action="Details" asp-route-id="@post.Id" class="btn-outline" style="font-size:0.8rem; padding:0.4rem 0.9rem;">
+                        <i class="fas fa-eye"></i> Read
+                    </a>
+                    @if (role == "Admin" || role == "Editor")
+                    {
+                        <a asp-action="Edit" asp-route-id="@post.Id" class="btn-warning-soft">
+                            <i class="fas fa-pen"></i> Edit
+                        </a>
+                    }
+                    @if (role == "Admin")
+                    {
+                        <form asp-action="Delete" asp-route-id="@post.Id" method="post" style="display:inline;"
+                              onsubmit="return confirm('Delete this post permanently?')">
+                            <button type="submit" class="btn-danger-soft">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="pagination-custom">
+    @if (Model.PageIndex > 1)
+    {
+        <a class="page-btn"
+           asp-action="Index"
+           asp-route-pageIndex="@(Model.PageIndex - 1)"
+           asp-route-categoryName="@Model.CategoryName"
+           asp-route-status="@Model.Status">
+            <i class="fas fa-chevron-left"></i> Prev
+        </a>
+    }
+    <span class="page-btn active">@Model.PageIndex</span>
+    @if (Model.PageIndex * Model.PageSize < Model.Count)
+    {
+        <a class="page-btn"
+           asp-action="Index"
+           asp-route-pageIndex="@(Model.PageIndex + 1)"
+           asp-route-categoryName="@Model.CategoryName"
+           asp-route-status="@Model.Status">
+            Next <i class="fas fa-chevron-right"></i>
+        </a>
+    }
+</div>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Shared\Error.cshtml ===
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>Development Mode</h3>
+<p>
+    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
+</p>
+<p>
+    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
+    It can result in displaying sensitive information from exceptions to end users.
+    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
+    and restarting the app.
+</p>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Shared\_Layout.cshtml ===
+@inject Blog.MVC.ServicesAbstraction.ITokenParserService TokenParser
+
+@{
+    var isLoggedIn = TokenParser.IsLoggedIn();
+    var userName = TokenParser.GetUserName();
+    var role = TokenParser.GetRole();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BlogSystem</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        :root {
+            --bg:        #0f0f0f;
+            --surface:   #1a1a1a;
+            --border:    #2a2a2a;
+            --gold:      #c9a84c;
+            --gold-light:#e8c97a;
+            --text:      #e8e4dc;
+            --muted:     #888;
+            --danger:    #e05252;
+            --success:   #4caf7d;
+            --warning:   #e0a852;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .site-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .site-brand span { color: var(--text); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); background: var(--border); }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .badge-role {
+            background: var(--border);
+            color: var(--gold);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .site-main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        .site-footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .site-footer span { color: var(--gold); }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .page-subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+        .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #0f0f0f;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+
+        .btn-gold:hover { background: var(--gold-light); color: #0f0f0f; transform: translateY(-1px); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 0.55rem 1.3rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+        .btn-danger-soft {
+            background: transparent;
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-danger-soft:hover { background: var(--danger); color: white; }
+
+        .btn-warning-soft {
+            background: transparent;
+            color: var(--warning);
+            border: 1px solid var(--warning);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-warning-soft:hover { background: var(--warning); color: #0f0f0f; }
+
+        .card-dark {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .card-dark:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+        .form-group { margin-bottom: 1.25rem; }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-select-dark, .form-textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .form-input:focus, .form-select-dark:focus, .form-textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+        }
+
+        .form-select-dark option { background: var(--surface); }
+        .field-error { color: var(--danger); font-size: 0.8rem; margin-top: 0.3rem; }
+
+        .badge-status {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-published { background: rgba(76,175,125,0.15); color: var(--success); }
+        .badge-draft     { background: rgba(136,136,136,0.15); color: var(--muted); }
+        .badge-archived  { background: rgba(224,168,82,0.15); color: var(--warning); }
+
+        .table-dark-custom { width: 100%; border-collapse: collapse; }
+        .table-dark-custom th {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--muted);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+        }
+        .table-dark-custom td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        .table-dark-custom tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .pagination-custom { display: flex; gap: 0.5rem; margin-top: 2rem; align-items: center; }
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        .page-btn:hover, .page-btn.active { border-color: var(--gold); color: var(--gold); }
+
+        .alert-dark {
+            background: rgba(224,82,82,0.1);
+            border: 1px solid rgba(224,82,82,0.3);
+            color: var(--danger);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        @@keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up { animation: fadeUp 0.4s ease forwards; }
+
+        @@media (max-width: 768px) {
+            .nav-links a { padding: 0.5rem 0.6rem; font-size: 0.8rem; }
+            .site-main { padding: 1.5rem 1rem; }
+            .page-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a class="site-brand" asp-controller="Posts" asp-action="Index">
+                Blog<span>System</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a asp-controller="Posts" asp-action="Index"><i class="fas fa-newspaper"></i> Posts</a></li>
+                @if (role == "Admin" || role == "Editor")
+                {
+                    <li><a asp-controller="Posts" asp-action="Create"><i class="fas fa-plus"></i> New Post</a></li>
+                }
+                @if (role == "Admin")
+                {
+                    <li><a asp-controller="Categories" asp-action="Index"><i class="fas fa-tags"></i> Categories</a></li>
+                    <li><a asp-controller="Dashboard" asp-action="Index"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                }
+            </ul>
+
+            <div class="nav-user">
+                @if (isLoggedIn)
+                {
+                    <span><i class="fas fa-user-circle"></i> @userName</span>
+                    <span class="badge-role">@role</span>
+                    <a asp-controller="Account" asp-action="Logout" class="btn-outline" style="padding:0.35rem 0.9rem;font-size:0.8rem;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="btn-outline" style="padding:0.35rem 0.9rem;font-size:0.8rem;">Login</a>
+                    <a asp-controller="Account" asp-action="Register" class="btn-gold" style="padding:0.35rem 0.9rem;font-size:0.8rem;">Register</a>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <main class="site-main fade-up">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        &copy; 2026 <span>BlogSystem</span> — All rights reserved
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+=== E:\Course BackEnd ASP.NET\API\BlogSystemSolution\Blog.MVC\Views\Shared\_ValidationScriptsPartial.cshtml ===
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

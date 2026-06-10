@@ -15,5 +15,11 @@ namespace Blog.Shared.DTOs.Dashboard
         public int TotalCategories { get; set; }
 
         public int TotalUsers { get; set; }
+
+        public List<string> RecentPosts { get; set; }
+            = new();
+
+        public List<string> RecentCategories { get; set; }
+            = new();
     }
 }

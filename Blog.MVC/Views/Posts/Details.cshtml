@@ -1,82 +1,106 @@
-﻿@model Blog.MVC.ViewModels.PostDetailsViewModel
+﻿@using Blog.Domain.Entities.Enums
+@model Blog.MVC.ViewModels.PostDetailsViewModel
 @inject Blog.MVC.ServicesAbstraction.ITokenParserService TokenParser
 
-<h1>@Model.Post.Title</h1>
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
 
-<hr />
+<div style="max-width:800px; margin:0 auto;">
 
-<p>
-    @Model.Post.Content
-</p>
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Posts
+    </a>
 
-<hr />
-
-<h3>Comments</h3>
-<hr />
-
-<h3>Add Comment</h3>
-
-<form asp-action="CreateComment" method="post">
-
-    <input type="hidden"
-           asp-for="CreateComment.PostId"
-           value="@Model.Post.Id" />
-
-    <div>
-        <textarea asp-for="CreateComment.Content"
-                  rows="4"
-                  cols="50">
-        </textarea>
+    <div style="margin-bottom:1rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+        <span class="badge-status @(Model.Post.Status == Status.Published ? "badge-published" : Model.Post.Status == Status.Draft ? "badge-draft" : "badge-archived")">
+            @Model.Post.Status
+        </span>
+        <span style="font-size:0.8rem; color:var(--muted);"><i class="fas fa-tag"></i> @Model.Post.CategoryName</span>
+        <span style="font-size:0.8rem; color:var(--muted);"><i class="fas fa-user"></i> @Model.Post.AuthorName</span>
     </div>
 
-    <span asp-validation-for="CreateComment.Content"></span>
+    <h1 style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; line-height:1.2; margin-bottom:2rem;">
+        @Model.Post.Title
+    </h1>
 
-    <br />
+    <hr class="divider" />
 
-    <button type="submit">
-        Add Comment
-    </button>
+    <div style="color:var(--text); line-height:1.9; font-size:1.05rem; margin-bottom:3rem; white-space:pre-wrap;">
+        @Model.Post.Content
+    </div>
 
-</form>
-@if (Model.Comments.Any())
-{
-    @foreach (var comment in Model.Comments)
-    {
-        <div style="margin-bottom:15px">
+    <hr class="divider" />
 
-            <strong>
-                @comment.AuthorName
-            </strong>
+    <!-- COMMENTS SECTION -->
+    <div style="margin-top:2rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:1.5rem;">
+            <i class="fas fa-comments" style="color:var(--gold);"></i>
+            Comments (@Model.Comments.Count())
+        </h2>
 
-            <p>
-                @comment.Content
-            </p>
-
-            @if (TokenParser.IsLoggedIn())
-            {
-                <form asp-action="DeleteComment"
-                      method="post"
-                      style="display:inline">
-
-                    <input type="hidden"
-                           name="commentId"
-                           value="@comment.Id" />
-
-                    <input type="hidden"
-                           name="postId"
-                           value="@Model.Post.Id" />
-
-                    <button type="submit">
-                        Delete Comment
+        @if (TokenParser.IsLoggedIn())
+        {
+            <div class="card-dark" style="margin-bottom:2rem;">
+                <h4 style="font-size:0.9rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1rem;">
+                    Leave a Comment
+                </h4>
+                <form asp-action="CreateComment" method="post">
+                    <input type="hidden" asp-for="CreateComment.PostId" value="@Model.Post.Id" />
+                    <div class="form-group">
+                        <textarea asp-for="CreateComment.Content"
+                                  class="form-textarea"
+                                  rows="4"
+                                  placeholder="Share your thoughts..."></textarea>
+                        <span asp-validation-for="CreateComment.Content" class="field-error"></span>
+                    </div>
+                    <button type="submit" class="btn-gold">
+                        <i class="fas fa-paper-plane"></i> Post Comment
                     </button>
-
                 </form>
-            }
+            </div>
+        }
 
-        </div>
-    }
-}
-else
-{
-    <p>No Comments Yet</p>
+        @if (Model.Comments.Any())
+        {
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="card-dark" style="padding:1.25rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <div style="width:32px; height:32px; border-radius:50%; background:var(--border); display:flex; align-items:center; justify-content:center; font-size:0.8rem; color:var(--gold); font-weight:700;">
+                                    @comment.AuthorName?.FirstOrDefault()
+                                </div>
+                                <strong style="font-size:0.9rem;">@comment.AuthorName</strong>
+                            </div>
+                            @if (TokenParser.IsLoggedIn())
+                            {
+                                <form asp-action="DeleteComment" method="post" style="display:inline;"
+                                      onsubmit="return confirm('Delete this comment?')">
+                                    <input type="hidden" name="commentId" value="@comment.Id" />
+                                    <input type="hidden" name="postId" value="@Model.Post.Id" />
+                                    <button type="submit" class="btn-danger-soft" style="padding:0.25rem 0.6rem; font-size:0.75rem;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            }
+                        </div>
+                        <p style="color:var(--text); font-size:0.9rem; line-height:1.6; margin:0;">@comment.Content</p>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div style="text-align:center; padding:3rem 0; color:var(--muted);">
+                <i class="fas fa-comment-slash" style="font-size:2rem; margin-bottom:0.75rem; display:block; opacity:0.3;"></i>
+                <p>No comments yet. Be the first to comment!</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

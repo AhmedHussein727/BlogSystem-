@@ -16,5 +16,7 @@ namespace Blog.Services.Abstraction
         Task<AuthResponseDto<UserDTO>> RegisterAsync(RegisterDTO registerDTO);
 
         Task<AuthResponseDto<string>> AssignRoleAsync(string userId, string role);
+
+        Task<IEnumerable<UserWithRoleDto>> GetAllUsersAsync();
     }
 }

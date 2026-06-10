@@ -1,71 +1,74 @@
 ﻿@model Blog.MVC.DTOs.Dashboard.DashboardDTO
 
-<h1>Admin Dashboard</h1>
+@{
+    ViewData["Title"] = "Dashboard";
+}
 
-<div class="row">
+<h1 class="page-title">Dashboard</h1>
+<p class="page-subtitle">Overview of your blog performance</p>
 
-    <div class="col-md-3">
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:1.25rem; margin-top:2rem;">
 
-        <div class="card text-center shadow-sm">
-
-            <div class="card-body">
-
-                <h3>@Model.TotalPosts</h3>
-
-                <p>Total Posts</p>
-
-            </div>
-
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:var(--gold); margin-bottom:0.75rem;">
+            <i class="fas fa-newspaper"></i>
         </div>
-
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalPosts
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Posts
+        </div>
     </div>
 
-    <div class="col-md-3">
-
-        <div class="card text-center shadow-sm">
-
-            <div class="card-body">
-
-                <h3>@Model.TotalComments</h3>
-
-                <p>Total Comments</p>
-
-            </div>
-
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:#4caf7d; margin-bottom:0.75rem;">
+            <i class="fas fa-comments"></i>
         </div>
-
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalComments
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Comments
+        </div>
     </div>
 
-    <div class="col-md-3">
-
-        <div class="card text-center shadow-sm">
-
-            <div class="card-body">
-
-                <h3>@Model.TotalCategories</h3>
-
-                <p>Total Categories</p>
-
-            </div>
-
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:#e0a852; margin-bottom:0.75rem;">
+            <i class="fas fa-tags"></i>
         </div>
-
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalCategories
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Categories
+        </div>
     </div>
 
-    <div class="col-md-3">
-
-        <div class="card text-center shadow-sm">
-
-            <div class="card-body">
-
-                <h3>@Model.TotalUsers</h3>
-
-                <p>Total Users</p>
-
-            </div>
-
+    <div class="card-dark" style="text-align:center; padding:2rem 1.5rem;">
+        <div style="font-size:2rem; color:#6c9ee0; margin-bottom:0.75rem;">
+            <i class="fas fa-users"></i>
         </div>
-
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--text);">
+            @Model.TotalUsers
+        </div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; margin-top:0.25rem;">
+            Total Users
+        </div>
     </div>
 
+</div>
+
+<hr class="divider" style="margin-top:2.5rem;" />
+
+<div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+    <a asp-controller="Posts" asp-action="Index" class="btn-outline">
+        <i class="fas fa-newspaper"></i> Manage Posts
+    </a>
+    <a asp-controller="Categories" asp-action="Index" class="btn-outline">
+        <i class="fas fa-tags"></i> Manage Categories
+    </a>
+    <a asp-controller="Posts" asp-action="Create" class="btn-gold">
+        <i class="fas fa-plus"></i> New Post
+    </a>
 </div>

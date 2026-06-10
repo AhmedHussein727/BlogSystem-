@@ -1,56 +1,68 @@
-﻿@model List<Blog.MVC.DTOs.Category. CategoryDTO>
+﻿@model List<Blog.MVC.DTOs.Category.CategoryDTO>
 
-<h1>Categories</h1>
+@{
+    ViewData["Title"] = "Categories";
+}
 
-<a asp-action="Create"
-   class="btn btn-success mb-3">
-    Create Category
-</a>
+<div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+    <div>
+        <h1 class="page-title">Categories</h1>
+        <p class="page-subtitle">Manage your blog categories</p>
+    </div>
+    <a asp-action="Create" class="btn-gold">
+        <i class="fas fa-plus"></i> New Category
+    </a>
+</div>
 
-<table class="table">
-
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-        @foreach (var category in Model)
-        {
-            <tr>
-
-                <td>
-                    @category.Name
-                </td>
-
-                <td>
-
-                    <a asp-action="Edit"
-                       asp-route-id="@category.Id"
-                       class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
-
-                    <form asp-action="Delete"
-                          asp-route-id="@category.Id"
-                          method="post"
-                          class="d-inline">
-
-                        <button type="submit"
-                                class="btn btn-danger btn-sm">
-                            Delete
-                        </button>
-
-                    </form>
-
-                </td>
-
-            </tr>
-        }
-
-    </tbody>
-
-</table>
+@if (!Model.Any())
+{
+    <div style="text-align:center; padding:4rem 0; color:var(--muted);">
+        <i class="fas fa-tags" style="font-size:3rem; margin-bottom:1rem; display:block; opacity:0.3;"></i>
+        <p>No categories yet. Create your first one!</p>
+    </div>
+}
+else
+{
+    <div class="card-dark" style="padding:0; overflow:hidden;">
+        <table class="table-dark-custom">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Category Name</th>
+                    <th style="text-align:right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td style="color:var(--muted); width:50px;">@i</td>
+                        <td>
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-tag" style="color:var(--gold); font-size:0.8rem;"></i>
+                                <span style="font-weight:500;">@category.Name</span>
+                            </div>
+                        </td>
+                        <td style="text-align:right;">
+                            <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
+                                <a asp-action="Edit" asp-route-id="@category.Id" class="btn-warning-soft">
+                                    <i class="fas fa-pen"></i> Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@category.Id" method="post" style="display:inline;"
+                                      onsubmit="return confirm('Delete category @category.Name?')">
+                                    <button type="submit" class="btn-danger-soft">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+}

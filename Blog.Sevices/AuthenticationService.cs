@@ -2,6 +2,7 @@
 using Blog.Services.Abstraction;
 using Blog.Shared.DTOs.IdentityDTOs;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -184,6 +185,28 @@ namespace Blog.Sevices
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        
+
+
+        public async Task<IEnumerable<UserWithRoleDto>> GetAllUsersAsync()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var result = new List<UserWithRoleDto>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                result.Add(new UserWithRoleDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email!,
+                    Role = roles.FirstOrDefault() ?? "Reader"
+                });
+            }
+
+            return result;
+        }
+
+
     }
 }

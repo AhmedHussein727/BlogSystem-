@@ -1,22 +1,30 @@
 ﻿@model Blog.MVC.DTOs.Category.CreateCategoryDto
 
-<h2>Create Category</h2>
+@{
+    ViewData["Title"] = "Create Category";
+}
 
-<form asp-action="Create"
-      method="post">
+<div style="max-width:480px; margin:0 auto;">
+    <a asp-action="Index" style="color:var(--muted); text-decoration:none; font-size:0.875rem; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Categories
+    </a>
 
-    <div class="mb-3">
+    <h1 class="page-title">New Category</h1>
+    <p class="page-subtitle">Add a new category to organize posts</p>
 
-        <label>Name</label>
-
-        <input asp-for="Name"
-               class="form-control" />
-
+    <div class="card-dark" style="margin-top:1.5rem;">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label class="form-label">Category Name</label>
+                <input asp-for="Name" class="form-input" placeholder="e.g. Technology, Travel..." />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+            <div style="display:flex; gap:1rem;">
+                <button type="submit" class="btn-gold">
+                    <i class="fas fa-plus"></i> Create
+                </button>
+                <a asp-action="Index" class="btn-outline">Cancel</a>
+            </div>
+        </form>
     </div>
-
-    <button type="submit"
-            class="btn btn-primary">
-        Create
-    </button>
-
-</form>
+</div>

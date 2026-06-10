@@ -27,11 +27,12 @@ namespace Blog.Sevices.Specifications
         {
         }
 
-        public BlogPostSpecification(int id):base(x=>x.Id==id)
+        public BlogPostSpecification(int id) : base(x => x.Id == id)
         {
             AddInclude(x => x.Category);
-
+            AddInclude(x => x.Author);
         }
+
 
 
     }
