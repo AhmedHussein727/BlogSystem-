@@ -1,1 +1,143 @@
-﻿
+﻿@model List<Blog.Shared.DTOs.IdentityDTOs.UserWithRoleDto>
+
+@{
+    ViewData["Title"] = "Users Management";
+}
+
+<div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+    <div>
+        <h1 class="page-title">Users Management</h1>
+        <p class="page-subtitle">Manage user roles and permissions</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+        <span style="font-size:0.8rem; color:var(--muted);">
+            <i class="fas fa-users"></i> @Model.Count user(s)
+        </span>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div style="text-align:center; padding:4rem 0; color:var(--muted);">
+        <i class="fas fa-users" style="font-size:3rem; margin-bottom:1rem; display:block; opacity:0.3;"></i>
+        <p>No users found.</p>
+    </div>
+}
+else
+{
+    <div class="card-dark" style="padding:0; overflow:hidden;">
+        <table class="table-dark-custom">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Current Role</th>
+                    <th style="text-align:right;">Change Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td style="color:var(--muted); width:50px;">@i</td>
+
+                        <td>
+                            <div style="display:flex; align-items:center; gap:0.6rem;">
+                                <div style="width:34px; height:34px; border-radius:50%; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); display:flex; align-items:center; justify-content:center; font-size:0.85rem; color:var(--gold); font-weight:700; flex-shrink:0;">
+                                    @user.Name.Substring(0, 1).ToUpper()
+                                </div>
+                                <span style="font-weight:500;">@user.Name</span>
+                            </div>
+                        </td>
+
+                        <td style="color:var(--muted); font-size:0.875rem;">@user.Email</td>
+
+                        <td>
+                            @{
+                                var badgeColor = user.Role switch
+                                {
+                                    "Admin" => "color:#e05252; background:rgba(224,82,82,0.12); border:1px solid rgba(224,82,82,0.25);",
+                                    "Editor" => "color:var(--warning); background:rgba(224,168,82,0.12); border:1px solid rgba(224,168,82,0.25);",
+                                    _ => "color:var(--muted); background:rgba(136,136,136,0.12); border:1px solid rgba(136,136,136,0.25);"
+                                };
+                            }
+                            <span style="display:inline-block; padding:3px 12px; border-radius:20px; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; @badgeColor">
+                                @user.Role
+                            </span>
+                        </td>
+
+                        <td style="text-align:right;">
+                            <div style="display:flex; gap:0.5rem; justify-content:flex-end; flex-wrap:wrap;">
+
+                                @if (user.Role != "Admin")
+                                {
+                                    <form asp-action="AssignRole" method="post" style="display:inline;">
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        <input type="hidden" name="role" value="Admin" />
+                                        <button type="submit"
+                                                onclick="return confirm('Make @user.Name an Admin?')"
+                                                style="background:transparent; color:#e05252; border:1px solid #e05252; padding:0.35rem 0.85rem; border-radius:8px; font-size:0.75rem; font-weight:600; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:0.3rem;"
+                                                onmouseover="this.style.background='#e05252';this.style.color='white';"
+                                                onmouseout="this.style.background='transparent';this.style.color='#e05252';">
+                                            <i class="fas fa-shield-alt"></i> Admin
+                                        </button>
+                                    </form>
+                                }
+
+                                @if (user.Role != "Editor")
+                                {
+                                    <form asp-action="AssignRole" method="post" style="display:inline;">
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        <input type="hidden" name="role" value="Editor" />
+                                        <button type="submit"
+                                                onclick="return confirm('Make @user.Name an Editor?')"
+                                                class="btn-warning-soft">
+                                            <i class="fas fa-pen"></i> Editor
+                                        </button>
+                                    </form>
+                                }
+
+                                @if (user.Role != "Reader")
+                                {
+                                    <form asp-action="AssignRole" method="post" style="display:inline;">
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        <input type="hidden" name="role" value="Reader" />
+                                        <button type="submit"
+                                                onclick="return confirm('Downgrade @user.Name to Reader?')"
+                                                style="background:transparent; color:var(--muted); border:1px solid var(--border); padding:0.35rem 0.85rem; border-radius:8px; font-size:0.75rem; font-weight:600; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:0.3rem;"
+                                                onmouseover="this.style.borderColor='var(--muted)';this.style.color='var(--text)';"
+                                                onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)';">
+                                            <i class="fas fa-user"></i> Reader
+                                        </button>
+                                    </form>
+                                }
+
+                            </div>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Role Legend -->
+    <div style="display:flex; gap:1.5rem; margin-top:1.5rem; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--muted);">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#e05252;"></span>
+            Admin — Full access
+        </div>
+        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--muted);">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--warning);"></span>
+            Editor — Can create & edit posts
+        </div>
+        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--muted);">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--muted);"></span>
+            Reader — Read & comment only
+        </div>
+    </div>
+}
