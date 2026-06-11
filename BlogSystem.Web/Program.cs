@@ -26,7 +26,7 @@ namespace BlogSystem.Web
             // Add services to the container.
             builder.Services.AddDbContext<BlogDbContext>(options =>
             {
-                options.UseSqlServer(
+                options.UseNpgsql(
                     builder.Configuration.GetConnectionString("DefaultConnection")
                 );
             });
