@@ -15,7 +15,7 @@ namespace Blog.Presistance.Data.Configuration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.CreatedAt)
-             .HasDefaultValueSql("GETDATE()");
+             .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.HasOne(x=>x.Author)
                 .WithMany(x=>x.Posts)
