@@ -185,7 +185,7 @@ dotnet run
 ![Login](Screenshots/Login.png)
 
 ### Posts Page
-![Posts](Screenshots/posts.png)
+![Posts](Screenshots/Home.png)
 
 
 ### Posts Details Page
