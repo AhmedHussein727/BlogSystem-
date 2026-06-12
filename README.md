@@ -179,6 +179,30 @@ dotnet run
 
 ---
 
+## Screenshots
+
+### Login Page
+![Login](Screenshots/Login.png)
+
+### Posts Page
+![Posts](Screenshots/posts.png)
+
+
+### Posts Details Page
+![Posts](Screenshots/PostDetails.png)
+
+### Post Details
+![Post Details](Screenshots/Home.png)
+
+### Categories
+![Categories](Screenshots/Categories.png)
+
+### Admin Dashboard
+![Dashboard](Screenshots/Dashboard.png)
+
+### User Management Page
+![Register](Screenshots/UsersManagement.png)
+
 ## Author
 
 Ahmed Hussein
