@@ -74,7 +74,7 @@ BlogSystem/
 
 ### Flow
 ```
-User → Blog.MVC (Frontend) → BlogSystem.Web (API) → SQL Server Database
+User → Blog.MVC (Frontend) → BlogSystem.Web (API) → PostgreSQL on Neon
 ```
 
 ---
@@ -126,7 +126,7 @@ User → Blog.MVC (Frontend) → BlogSystem.Web (API) → SQL Server Database
 |-------|-----------|
 | **Backend** | ASP.NET Core 8 Web API |
 | **Frontend** | ASP.NET Core 8 MVC + Razor Views |
-| **Database** | SQL Server + EF Core 8 |
+| **Database** | PostgreSQL (hosted on [Neon](https://neon.tech)) + EF Core 8 |
 | **Authentication** | ASP.NET Core Identity + JWT |
 | **Mapping** | AutoMapper |
 | **UI** | Bootstrap + Custom Dark Theme |
@@ -210,8 +210,8 @@ User → Blog.MVC (Frontend) → BlogSystem.Web (API) → SQL Server Database
 
 ### Prerequisites
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) or VS Code
+- A free [Neon](https://neon.tech) account for the PostgreSQL database
 
 ### Setup
 
@@ -221,13 +221,17 @@ git clone https://github.com/AhmedHussein727/BlogSystem-.git
 cd BlogSystem-
 ```
 
-**2. Configure the API** — `BlogSystem.Web/appsettings.Development.json`
+**2. Create a free PostgreSQL database on [Neon](https://neon.tech)**
+- Sign up and create a new project
+- Copy the connection string from the dashboard
+
+**3. Configure the API** — create `BlogSystem.Web/appsettings.Development.json`
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=YOUR_SERVER;Database=BlogDb;Trusted_Connection=True;TrustServerCertificate=True"
+    "DefaultConnection": "Host=...;Database=...;Username=...;Password=...;SSLMode=Require"
   },
-  "JwtOptions": {
+  "JWTOptions": {
     "SecretKey": "your-secret-key-min-32-characters",
     "Issuer": "https://localhost:7145/",
     "Audience": "https://localhost:7145/"
@@ -235,13 +239,13 @@ cd BlogSystem-
 }
 ```
 
-**3. Apply Migrations**
+**4. Apply Migrations**
 ```bash
 cd BlogSystem.Web
 dotnet ef database update --project ../Blog.Presistance
 ```
 
-**4. Run both projects**
+**5. Run both projects**
 
 In Visual Studio — right-click Solution → **Set Startup Projects** → select both `BlogSystem.Web` and `Blog.MVC`.
 
@@ -254,7 +258,7 @@ cd BlogSystem.Web && dotnet run
 cd Blog.MVC && dotnet run
 ```
 
-**5. Default Admin Account**
+**6. Default Admin Account**
 ```
 Email:    admin@blogsystem.com
 Password: Admin@123
@@ -278,8 +282,6 @@ Password: Admin@123
 
 - GitHub: [@AhmedHussein727](https://github.com/AhmedHussein727)
 - LinkedIn: [Ahmed Hussein](https://linkedin.com/in/ahmed-hussein001)
-
-
 
 ---
 
