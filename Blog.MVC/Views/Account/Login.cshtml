@@ -1,5 +1,4 @@
-﻿@using Blog.MVC.DTOs
-@using Blog.MVC.DTOs.Account
+﻿@using Blog.MVC.DTOs.Account
 @model LoginDto
 
 @{
@@ -10,36 +9,92 @@
     <div style="width:100%; max-width:420px;">
 
         <div style="text-align:center; margin-bottom:2rem;">
-            <h1 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--gold);">BlogSystem</h1>
-            <p style="color:var(--muted); font-size:0.9rem; margin-top:0.25rem;">Sign in to your account</p>
+            <h1 style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--gold);">
+                BlogSystem
+            </h1>
+
+            <p style="color:var(--muted); font-size:0.9rem; margin-top:0.25rem;">
+                Sign in to your account
+            </p>
         </div>
 
         <div class="card-dark">
-            <div asp-validation-summary="All" class="alert-dark"></div>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All"
+                     style="background:#2b1414;
+                                border:1px solid #ef4444;
+                                color:#fca5a5;
+                                padding:12px;
+                                border-radius:10px;
+                                margin-bottom:15px;">
+                </div>
+            }
 
             <form asp-action="Login" method="post">
+
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
-                    <input asp-for="Email" class="form-input" placeholder="you@example.com" type="email" />
-                    <span asp-validation-for="Email" class="field-error"></span>
+
+                    <input asp-for="Email"
+                           class="form-input"
+                           placeholder="you@example.com"
+                           type="email" />
+
+                    <span asp-validation-for="Email"
+                          class="field-error">
+                    </span>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input asp-for="Password" class="form-input" placeholder="••••••••" type="password" />
-                    <span asp-validation-for="Password" class="field-error"></span>
+
+                    <input asp-for="Password"
+                           class="form-input"
+                           placeholder="••••••••"
+                           type="password" />
+
+                    <span asp-validation-for="Password"
+                          class="field-error">
+                    </span>
                 </div>
 
-                <button type="submit" class="btn-gold" style="width:100%; justify-content:center; padding:0.75rem; font-size:1rem; margin-top:0.5rem;">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
+                <button type="submit"
+                        class="btn-gold"
+                        style="width:100%;
+                               justify-content:center;
+                               padding:0.75rem;
+                               font-size:1rem;
+                               margin-top:0.5rem;">
+
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+
                 </button>
+
             </form>
+
         </div>
 
-        <p style="text-align:center; margin-top:1.25rem; color:var(--muted); font-size:0.875rem;">
+        <p style="text-align:center;
+                  margin-top:1.25rem;
+                  color:var(--muted);
+                  font-size:0.875rem;">
+
             Don't have an account?
-            <a asp-action="Register" style="color:var(--gold); text-decoration:none; font-weight:600;">Register</a>
+
+            <a asp-action="Register"
+               style="color:var(--gold);
+                      text-decoration:none;
+                      font-weight:600;">
+
+                Register
+
+            </a>
+
         </p>
+
     </div>
 </div>
 
