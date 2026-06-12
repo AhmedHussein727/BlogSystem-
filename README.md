@@ -1,224 +1,186 @@
-# 🚀 Blog System
+# Blog System
 
-![.NET](https://img.shields.io/badge/.NET-8.0-purple?style=for-the-badge&logo=.net)
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-Web_API-blue?style=for-the-badge&logo=dotnet)
-![MVC](https://img.shields.io/badge/MVC-Application-green?style=for-the-badge)
-![SQL Server](https://img.shields.io/badge/SQL_Server-Database-red?style=for-the-badge&logo=microsoftsqlserver)
-![JWT](https://img.shields.io/badge/JWT-Authentication-orange?style=for-the-badge&logo=jsonwebtokens)
+A full-stack blog management system built with ASP.NET Core following Clean Architecture principles.
+
+## Features
+
+### Authentication & Authorization
+
+* User Registration
+* User Login
+* JWT Authentication
+* Role-Based Authorization
+* Admin Role
+* Editor Role
+* User Role
+
+### Blog Posts
+
+* Create Posts
+* Edit Posts
+* Delete Posts
+* View Posts
+* Pagination Support
+* Category Assignment
+
+### Categories
+
+* Create Categories
+* Update Categories
+* Delete Categories
+* View Categories
+
+### Comments
+
+* Add Comments
+* Delete Comments
+* View Comments
+
+### Admin Dashboard
+
+* Total Posts Count
+* Total Comments Count
+* Total Categories Count
+* Total Users Count
 
 ---
 
-# 📌 Overview
+## Technologies Used
 
-A modern Blog System built with:
+### Backend
 
-- ASP.NET Core Web API
-- ASP.NET Core MVC
-- Clean Architecture
-- Repository Pattern
-- Unit Of Work
-- JWT Authentication
+* ASP.NET Core Web API
+* Entity Framework Core
+* PostgreSQL
+* JWT Authentication
+* AutoMapper
 
-The project demonstrates separation of concerns and scalable backend architecture using modern .NET practices.
+### Frontend
+
+* ASP.NET MVC
+* Razor Views
+* Bootstrap
+
+### Database
+
+* PostgreSQL (Neon)
+
+### Design Patterns
+
+* Repository Pattern
+* Unit Of Work Pattern
+* Dependency Injection
 
 ---
 
-# 🏗️ Architecture
+## Architecture
+
+The solution consists of two main applications:
+
+### BlogSystem.Web
+
+RESTful API responsible for:
+
+* Authentication
+* Authorization
+* Business Logic
+* Database Access
+
+### Blog.MVC
+
+MVC Frontend responsible for:
+
+* User Interface
+* Consuming API Endpoints
+* Authentication Flow
+
+Flow:
+
+User → MVC Application → Web API → PostgreSQL Database
+
+---
+
+## Roles
+
+### Admin
+
+* Manage Posts
+* Manage Categories
+* Delete Comments
+* Access Dashboard
+
+### Editor
+
+* Create Posts
+* Edit Posts
+
+### User
+
+* View Posts
+* Add Comments
+
+---
+
+## Database
+
+The application uses PostgreSQL hosted on Neon.
+
+Main Entities:
+
+* Users
+* Roles
+* Posts
+* Categories
+* Comments
+
+---
+
+## Getting Started
+
+### Clone Repository
 
 ```bash
-BlogSystemSolution
-│
-├── Core
-│   ├── Domain
-│   ├── Service
-│   └── Service.Abstraction
-│
-├── Infrastructure
-│   └── Persistence
-│
-├── Presentation
-│   ├── BlogSystem.Web   --> Web API
-│   └── Blog.MVC         --> MVC Frontend
+git clone <https://github.com/AhmedHussein727/BlogSystem->
 ```
 
----
+### Configure Database
 
-# ✨ Features
+Update Connection String in:
 
-## 🔐 Authentication & Authorization
-
-- JWT Authentication
-- Role-Based Authorization
-- Admin / Editor / User Roles
-
----
-
-## 📝 Blog Posts
-
-- Create Post
-- Update Post
-- Delete Post
-- Get All Posts
-- Pagination
-- Post Details
-
----
-
-## 💬 Comments
-
-- Add Comment
-- Delete Comment
-- Get Post Comments
-
----
-
-## 🌐 MVC Integration
-
-- MVC consuming API using HttpClient
-- Dynamic Details Pages
-- Comments Rendering
-- ViewModels Support
-
----
-
-# 🛠️ Technologies
-
-| Technology | Usage |
-|---|---|
-| ASP.NET Core 8 | Backend |
-| ASP.NET MVC | Frontend |
-| Entity Framework Core | ORM |
-| SQL Server | Database |
-| AutoMapper | Mapping |
-| JWT | Authentication |
-| LINQ | Querying |
-| Repository Pattern | Data Access |
-| Unit Of Work | Transaction Management |
-
----
-
-# 📂 Project Layers
-
-## 🔹 Domain
-
-Contains:
-
-- Entities
-- Interfaces
-- Enums
-
----
-
-## 🔹 Persistence
-
-Contains:
-
-- DbContext
-- Repositories
-- Configurations
-- Migrations
-
----
-
-## 🔹 Services
-
-Contains:
-
-- Business Logic
-- DTO Mapping
-- Validation
-
----
-
-## 🔹 Presentation
-
-Contains:
-
-- API Controllers
-- MVC Controllers
-- Views
-- ViewModels
-
----
-
-# ⚙️ Getting Started
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone YOUR_REPOSITORY_LINK
-```
-
----
-
-## 2️⃣ Configure Database
-
-Update:
-
-```bash
+```json
 appsettings.json
 ```
 
-Connection String.
-
----
-
-## 3️⃣ Apply Migrations
+### Apply Migrations
 
 ```bash
-Update-Database
+dotnet ef database update
+```
+
+### Run API
+
+```bash
+dotnet run
+```
+
+### Run MVC Application
+
+```bash
+dotnet run
 ```
 
 ---
 
-## 4️⃣ Run Projects
+## Future Improvements
 
-Run both:
-
-- BlogSystem.Web
-- Blog.MVC
-
----
-
-# 🔑 API Authentication
-
-Use JWT Token:
-
-```http
-Authorization: Bearer YOUR_TOKEN
-```
+* Email Confirmation
+* Docker Deployment
+* Cloud Hosting
 
 ---
 
-# 📈 Future Improvements
-
-- Like System
-- Rich Text Editor
-- Image Upload
-- Categories Dashboard
-- User Profiles
-- Admin Dashboard
-- Caching
-- SignalR Notifications
-
----
-
-# 👨‍💻 Developer
+## Author
 
 Ahmed Hussein
 
 ASP.NET Core Backend Developer
-
----
-
-# ⭐ Support
-
-If you like this project:
-
-- ⭐ Star the repository
-- 🍴 Fork the project
-- 🛠️ Contribute
-
----
-
-# 🔥 Built with ASP.NET Core & Clean Architecture
