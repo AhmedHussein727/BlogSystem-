@@ -41,7 +41,9 @@
 
         @if (TokenParser.IsLoggedIn())
         {
-            <div class="card-dark" style="margin-bottom:2rem;">
+            <div class="card-dark" style="margin-bottom:.5rem;
+                max-width:650px;
+                padding:0.5rem;">
                 <h4 style="font-size:0.9rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:1rem;">
                     Leave a Comment
                 </h4>
@@ -50,7 +52,8 @@
                     <div class="form-group">
                         <textarea asp-for="CreateComment.Content"
                                   class="form-textarea"
-                                  rows="4"
+                                  rows="2"
+                                  style="max-width:600px; width:100%;"
                                   placeholder="Share your thoughts..."></textarea>
                         <span asp-validation-for="CreateComment.Content" class="field-error"></span>
                     </div>
